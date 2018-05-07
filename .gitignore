@@ -1,0 +1,27 @@
+
+# Visual Studio
+.vscode/
+
+# Node.js Tools for Visual Studio
+node_modules/
+
+# npm
+*-lock.json
+npm-debug.log
+
+# Web workbench (sass)
+.sass-cache/
+*.css.map
+
+# Python Tools for Visual Studio (PTVS)
+__pycache__/
+*.pyc
+
+# virtualenv
+ENV/
+
+# results
+dist/
+
+# drive
+docs/recordatorios.txt
