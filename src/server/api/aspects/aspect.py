@@ -14,5 +14,5 @@ Entonces tendremos clases para contro-
 lar tiempos, clases para los logs,
 etc.
 '''
-class Aspects(object):
+class Aspect(object):
   pass

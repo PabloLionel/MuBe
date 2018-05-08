@@ -2,10 +2,12 @@
 Aqui modelamos la solucion del
 dominio del problema.
 '''
-from api.config.config import Config
-from api.aspects.aspects import Aspects
-conf = Config()
-asp = Aspects()
+from api.config.setup import Setup
+from api.aspects.aspect import Aspect
 
-class Entities:
-  pass
+class Entitie:
+  conf = Setup()
+  asp = Aspect()
+
+  def __init__(self):
+    super(Entitie, self).__init__()

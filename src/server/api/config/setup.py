@@ -6,7 +6,7 @@ que estemos usando un Framework, una
 Biblioteba (library o lib), o cualquier
 otra tecnología.
 '''
-class Config:
+class Setup:
   """
   ...
   """

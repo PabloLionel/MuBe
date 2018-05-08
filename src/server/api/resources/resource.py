@@ -27,17 +27,17 @@ humana, sino que sera para otra
 maquina.
 '''
 # Dependencias trasversales
-from api.config.config import Config
-from api.aspects.aspects import Aspects
-conf = Config()
-asp = Aspects()
+from api.config.setup import Setup
+from api.aspects.aspect import Aspect
+conf = Setup()
+asp = Aspect()
 # Dependencias
-from api.controllers.controllers import Controllers
-from exceptions.exceptions import MBInputError, MBTransitionError
+from api.controllers.controller import Controller
+from exceptions.exception import MBInputError, MBTransitionError
 from api.dtos.dtos import Dtos
-from api.entities.entities import Entities
-ctrl = Controllers()
+from api.entities.entitie import Entitie
+ctrl = Controller()
 # Errores
 # err = MBInputError() o MBTransitionError()
 dtos = Dtos()
-enties = Entities()
+enties = Entitie()

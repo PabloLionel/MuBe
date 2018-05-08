@@ -2,10 +2,10 @@
 aqui iría nuestra interacion con
 la bese de datos.
 '''
-from api.config.config import Config
-from api.aspects.aspects import Aspects
-conf = Config()
-asp = Aspects()
+from api.config.setup import Setup
+from api.aspects.aspect import Aspect
+conf = Setup()
+asp = Aspect()
 
 class Db:
   pass
