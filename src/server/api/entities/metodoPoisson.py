@@ -29,5 +29,5 @@ class Poisson:
 
     return x, px, Fx
 
-poi = Poisson()
-print(poi.met_poisson(2))
+# poi = Poisson()
+# print(poi.met_poisson(2))

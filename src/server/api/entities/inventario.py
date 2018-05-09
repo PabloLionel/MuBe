@@ -8,6 +8,13 @@ class Inventario:
     pass
 
   def corridas(self, dias, demanda, demora, stock, ptoPedido, cantPedido):
+    """Funcion que realiza una simulacion de inventario dependiendo de los siguientes parametros:
+        dias: cantidad de corridas osea dias a simular;
+        demanda: un arreglo con la demanda esperada;
+        demora: un arreglo con los dias a demorar la reposicion;
+        stock: es la existencia inicial;
+        ptoPedido: marca el momento en que se va a realizar el pedido;
+        cantPedido: cantidad de dia de venta anteriores que se va a pedir que se reponga"""
     if type(stock) == type([]):
       ma = True
       corrida = len(stock)
@@ -127,6 +134,6 @@ pepe = [
   {'pedido': 12, 'stock': [36, 45, 52]}
 ]
 
-inv = Inventario()
-print(inv.exp_inventario(dias, demanda, demora, pepe, cantPedido))
+# inv = Inventario()
+# print(inv.exp_inventario(dias, demanda, demora, pepe, cantPedido))
 #print(corridas(dias, demanda, demora, 250, pedido, 5))

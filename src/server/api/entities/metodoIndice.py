@@ -1,7 +1,7 @@
 """ METODOS NUMEROS INDICE para GENERAR MUESTRAS ARTIFICIALES """
 
 class Indice:
-  """Se encarga de encontrar un valor de la variable aleatoria
+  """Esta clase se encarga de encontrar un valor de la variable aleatoria
      dependiendo del valor de la serie generada"""
   def __init__(self):
     pass
@@ -31,5 +31,5 @@ class Indice:
       vIndice[k] = X[l]
     return vIndice
 
-ind = Indice()
-print(ind.indice([0.125, 0.365, 0.854], [2, 4, 6], [0.2, 0.3, 1]))
+# ind = Indice()
+# print(ind.indice([0.125, 0.365, 0.854], [2, 4, 6], [0.2, 0.3, 1]))

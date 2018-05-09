@@ -35,5 +35,5 @@ class Normal:
 
     return x, xng
 
-nor = Normal()
-print(nor.met_normal([4, 2, 6, 8, 8], 6, 4))
+# nor = Normal()
+# print(nor.met_normal([4, 2, 6, 8, 8], 6, 4))

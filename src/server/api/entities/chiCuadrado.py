@@ -48,7 +48,7 @@ class TestChi:
   def ranking(self, semillas, series, series0y1, error):
     """ Recibe los arreglos de semillas, series, series0y1; la cantidad de repeticiones y el error
       devuelve devuelve en todo eso y mas en forma ordenada por el valor de chi"""
-    dic = cantDigitos(semillas, series, series0y1, error)
+    dic = self.cantDigitos(semillas, series, series0y1, error)
     long = len(dic)
     chi = [0] * long # va a contener todos los valores de chi
     chicuadrado = [0] * long # va acontener todo un diccionario ordenado por el valor de chi
@@ -93,5 +93,5 @@ class TestChi:
 
     return acum, correcto
 
-test = TestChi()
-print(test.cantDigitos([214, 235, 124], [[125, 365, 854], [854, 412, 85], [125, 965, 412]], [[0.125, 0.365, 0.854], [0.854, 0.412, 0.085], [0.125, 0.965, 0.412]], 0.01))
+# test = TestChi()
+# print(test.cantDigitos([214, 235, 124], [[125, 365, 854], [854, 412, 85], [125, 965, 412]], [[0.125, 0.365, 0.854], [0.854, 0.412, 0.085], [0.125, 0.965, 0.412]], 0.01))

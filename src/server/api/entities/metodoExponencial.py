@@ -23,5 +23,5 @@ class Exponencial:
     #print(str(x[j]) + "  " + str(fx[j]) + "      " + str(Fx[j]))
     return x, fx, Fx
 
-exp = Exponencial()
-print(exp.met_exponencial([0.005, 2, 3, 4, 5, 6, 7, 8], 9))
+# exp = Exponencial()
+# print(exp.met_exponencial([0.005, 2, 3, 4, 5, 6, 7, 8], 9))

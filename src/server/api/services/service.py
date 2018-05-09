@@ -1,9 +1,9 @@
-'''
+"""
 Solo declaramos las entidades
 necesarias para satifacer
 peticiones complejas de la a
-"Daos"
-'''
+'Daos'
+"""
 # dependencias transversales:
 from api.config.setup import Setup
 from api.aspects.aspect import Aspect
