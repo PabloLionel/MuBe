@@ -1,4 +1,4 @@
-# en este arreglo van los nombres de los modulos 
+# en este arreglo van los nombres de los modulos
 # para que funcione el asterisco en "import *"
 # ej: __all__=['modulo1','modulo2',...,'moduloN'].
-__all__=[]
+__all__=["chiCuadrado", "entitie", "gpmcMultiplicativo", "inventario", "metodoExponencial", "metodoIndice", "metodoNormal", "metodoPoisson", "metodoIndiceRuleta"]

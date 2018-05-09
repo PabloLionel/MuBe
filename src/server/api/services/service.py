@@ -1,18 +1,18 @@
-'''
+"""
 Solo declaramos las entidades
 necesarias para satifacer
 peticiones complejas de la a
-"Daos"
-'''
+'Daos'
+"""
 # dependencias transversales:
-from api.config.config import Config
-from api.aspects.aspects import Aspects
+from api.config.setup import Setup
+from api.aspects.aspect import Aspect
 # dependencias
-from api.entities.entities import Entities
+from api.entities.entitie import Entitie
 from api.daos.db import Db
 
-enties = Entities()
+enties = Entitie()
 db = Db()
 
-class Services:
+class Service:
   pass

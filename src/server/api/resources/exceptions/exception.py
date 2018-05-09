@@ -1,8 +1,8 @@
-'''
+"""
 voy a procesar los errores por
 excepciones (de todas formas hay
 varias alternativas)
-'''
+"""
 
 class MBError(Exception):
   """Base class for exceptions in this module."""
