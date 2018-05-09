@@ -24,7 +24,7 @@ asp = Aspect()
 
 # Dependencias
 from api.controllers.controller import Controller
-from exceptions.exception import MBInputError, MBTransitionError
+#from exceptions.exception import MBInputError, MBTransitionError
 from api.dtos.dtos import Dtos
 #from api.entities.entitie import Entitie
 from api.entities import *

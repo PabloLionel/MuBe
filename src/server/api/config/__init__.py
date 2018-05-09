@@ -4,6 +4,4 @@
 __all__=['setup']
 
 from flask import Flask
-#conf = config.Config()
-
 api = Flask(__name__)
