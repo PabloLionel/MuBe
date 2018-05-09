@@ -1,0 +1,28 @@
+html(lang="es")
+  head
+    //- basic page needs
+      ==================================================
+    meta(charset='UTF-8')
+    title MuBe
+    meta(http-equiv='X-UA-Compatible', content='ie=edge')
+    //-mobile specific metas
+      ==================================================
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    //-CSS
+      ==================================================
+      link(rel='stylesheet', href="{{url_for('static', filename='css/main.min.css')}}")
+    link(rel='stylesheet', href="./css/main.css")
+    //-script libs
+      ==================================================
+      script(type='text/javascript', src="{{url_for('static', filename='js/vue.min.js')}}")
+
+    //-
+      $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+    //-favicons
+      ==================================================
+    link(rel='icon', type='image/ico', href="{{url_for('static', filename='favicon.ico')}}")
+  body
+    block principal
+  block script
+    //- script(type='text/javascript', src="{{url_for('static', filename='js/main.js')}}")
+    script(type='text/javascript', src="js/all.js")
