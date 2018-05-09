@@ -27,4 +27,14 @@ def chi():
       )
     )
 
-api.run(host='0.0.0.0', port=5555, debug=True)
+
+@api.route("/test", methods=['POST'])
+@crossdomain(origin='*')
+def test():
+  print(json.loads(request.data))
+  return json.dumps({'cualquier': 'verdura'})
+
+
+
+
+api.run(host='0.0.0.0',debug=True, port=5555)

@@ -1,0 +1,75 @@
+@mixin form(){
+  $b-radius: 5px;
+  $pad: 8px;
+  $bg-seg: $bg-2;
+  .title{
+    text-align: center;
+    font-size: 1.5em;
+  }
+  .form{
+    @include from(m){@include toLeft(50%,0);}
+    box-shadow: 0 0 0 2px $bg-2;
+    border-radius: $b-radius;
+    padding: 5px;
+    color: $tx-6;
+    form{
+      .subtitle{
+        padding: $pad;
+        font-size: 24px;
+        background-color: $bg-seg;
+        color: $tx-6;
+        border-top-left-radius: $b-radius;
+        border-top-right-radius: $b-radius;
+        margin-top: 10px;
+        &:first-child{margin-top: 0;}
+      }
+      .section{
+        padding: $pad;
+        >*{display: block}
+        background-color: $bg-seg;
+        border-bottom-left-radius: $b-radius;
+        border-bottom-right-radius: $b-radius;
+        padding-bottom: $pad+8;
+        font-size: 18px;
+        input,
+        select{
+          display: block;
+          width: 90%;
+          padding: 5px;
+          @include m-auto;
+          background-color: $bg-1;
+          border-radius: $b-radius;
+          border: 0;
+          border-bottom: 1px solid $tx-5;
+        }
+      }
+    }
+  }
+  .preview{
+    @include showFrom(m);
+    @include from(m){@include toLeft(50%,0);}
+    padding: 5px;
+    .section{
+      font-size: 22px;
+      background-color: $bg-seg;
+      padding: 8px;
+      p{padding-left: 26px;}
+      &>p:first-child,
+      &>p:last-child{padding-left: 0;}
+    }
+  }
+  .button{
+    @include edgridButton($bg-5, $tx-1, radius);
+    padding: .5em 1.3em;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-top: 10px;
+    margin-right: 3px;
+    &:last-child{margin-right: 0}
+  }
+  @content
+}
+
+.MBForm{
+  @include form();
+}

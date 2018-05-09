@@ -1,0 +1,8 @@
+//-Menu
+  ==================================================
+.menu__content
+  .toggle
+    .line
+  ul
+    each val, index in {'/':'tablero','/#casos':'casos','/#informe':'informes','/#acerca':'acerca de'}
+      li: a.item(href=`${index}`) #{val}

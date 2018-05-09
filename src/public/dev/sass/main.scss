@@ -1,0 +1,59 @@
+$cssCore: false;
+$cssHelpers: true;
+
+// flex-container and flex-item
+$container : container;
+$item      : row;
+
+// Max width of containers
+$max-width : 1200px;
+
+// Breakpoints
+$breakpoints : (
+  s  : 320px,
+  m  : 640px,
+  l  : 1024px,
+  xl : 1440px
+);
+
+// $devMode: true;
+@import "../../../node_modules/ed-grid/ed-grid";
+
+//estilos personales:
+@import "lib/conf";
+@import "lib/helpers";
+@import "lib/menu";
+.toggle{@include toggle(line, $bg-2)}
+.#{$menu-name}{
+  @include menu(
+    item,//nombre para las clases item
+    5,//numero de items
+    m,//breakpoint
+    darken($negroMate,8),//background
+    $tx-2//color de texto
+    )
+}
+main{
+  @include to(m){padding-top:50px;}
+  @include from(m){margin-left:50px;}
+}
+@import "lib/form";
+@import "lib/buttons";
+.secciones{
+  @include secciones;
+}
+.footer{
+  @include footer();
+}
+@import "lib/table";
+.#{$table-name}{
+  @include table(
+    1063px, // brack Point del borde
+    ((135px+10*2)*6),
+    10px,
+    130px,// ancho de la columnas (ancho = )
+    20px,
+    $bg-4,
+    #000,
+    30);
+}

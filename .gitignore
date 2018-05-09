@@ -8,6 +8,10 @@ node_modules/
 # npm
 *-lock.json
 npm-debug.log
+.npmignore.swp
+
+# gulp
+gulpfile-no-funciona.js
 
 # Web workbench (sass)
 .sass-cache/
@@ -24,4 +28,4 @@ ENV/
 dist/
 
 # drive
-docs/recordatorios.txt
+recordatorios.txt

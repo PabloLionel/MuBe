@@ -1,0 +1,94 @@
+@mixin toggle($line,$color){
+  position:absolute;
+  width: 50px;
+  height: 50px;
+  padding: 5px;
+  cursor:pointer;
+  .#{$line}{
+    position:relative;
+    top:50%;
+    transform:translateY(-50%);
+    &,&::after,&::before{
+      width: 100%;
+      height: 4px;
+      background-color: $color;
+      border-radius:2px;
+      transition:all 500ms;
+    }
+    &::after,&::before{
+      content:'';
+      position: absolute;
+    }
+    &::before{top:-11px;}
+    &::after{top:11px;}
+  }
+  &:hover{.#{$line}{&,&::after,&::before{background-color:darken($color,15);}}}
+  &.active{
+    .#{$line}{
+      background-color: transparent;
+      &::before{transform:rotate(45deg) translate(9px,7px);}
+      &::after{transform:rotate(-45deg) translate(8px,-7px);}
+    }
+  }
+}
+@mixin menu($name-items,$n-items,$bp,$bg,$color){
+  display:block;
+  position: fixed;
+  z-index:100;
+  min-height: 50px;
+  background-color: $bg;
+  //conf. inicial
+  ul,
+  ol{
+    @include reset-list;
+    padding-top:50px;
+    overflow:hidden;
+    transition:all 1s;
+    li{
+      transition:box-shadow 500ms, padding-left 500ms;
+      &:hover,&:active{
+        box-shadow: 0 -1px darken($color,15) inset;
+      }
+    }
+    .#{$name-items}{
+      display:block;
+      padding:1em;
+      color:$color;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+  }
+  @include to(m){//antes de 576px($s)
+    width: 100%;
+    ul,
+    ol{
+      max-height:0;
+      .#{$name-items}{
+        width: 100%;
+        text-align:center;
+      }
+    }
+    &.active{//a $n-items le sumamos uno por el padding que los empuja
+      ul,
+      ol{max-height:50px*($n-items+1);}//50px: alto de los 'a' de 'li'
+    }
+  }
+  @include from(m){//despues de 577px ($s+1)
+    min-width: 50px;
+    height: 100vh;
+    ul,
+    ol{
+      padding-left:40px;
+      width: 0;
+      li:hover,li:active{
+        padding-left:10px;
+      }
+      .#{$name-items}{white-space: nowrap;}
+    }
+    &.active{
+      ul,
+      ol{width: 200px;}//50px: alto de los 'a' de 'li'
+    }
+  }
+}
+

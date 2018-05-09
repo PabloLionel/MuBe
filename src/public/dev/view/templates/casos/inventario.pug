@@ -1,0 +1,41 @@
+#invent.item__contend
+  .form
+    form
+      .subtitle Parametros de la Serie a Generar:
+      .section
+        .w-50
+          .input__group
+            label(for='modulo') Modulo:
+            input(type='number', name='modulo', placeholder='Modulo', required)
+          .input__group
+            label(for='cant') Cantidad:
+            input(type='number', name='cant', placeholder='Cantidad', required)
+        .w-50
+          .input__group
+            label(for='bandera') Bandera:
+            input(type='number', name='bandera', placeholder='Bandera', required)
+          .input__group
+            label(for='semilla') Semilla:
+            input(type='number', name='semilla', placeholder='semilla', required)
+      .subtitle Parametros de Experimentos:
+      .section
+        .w-50
+          p.full Experimento 1
+          input(type='number', name='stock', placeholder='stock', required)
+        .w-50
+          p.full corridas
+          label(for='pedidos') Cantidades de Puntos de Pedido:
+          input#cantPed(type='number', name='pedidos', placeholder='Puntos de reposición', min="1",value="1", required)
+          #inputsPed
+        .w-50
+          p.full Experimento 2
+          label(for='pedido') Punto de Pedido a Analizar:
+          input(type='number', name='pedido', placeholder='Pedido', required)
+        .w-50
+          p.full corridas
+          label(for='stocks') Cantidades de Stocks:
+          input#cantStock(type='number', name='stocks', placeholder='Stocks', min="1",value="1", required)
+          #inputsStock
+      a#calInventario(href='', class='button') calcular
+      a#resetFormTablero(href='', class='button') Restablecer
+  #experimentos
