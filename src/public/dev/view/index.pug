@@ -8,53 +8,20 @@ block principal
         h1#tablero tablero
     section.container
       .row
-        .MBForm
-          .form
-            h2.title Test Chi-Cuadrado
-            form(action='')
-              .subtitle Experimento:
-              .section
-                label(for='modulo') Modulo:
-                input(type='number', name='modulo', placeholder='Modulo', required)
-                label(for='cant') Cantidad:
-                input(type='number', name='cant', placeholder='Cantidad', required)
-                label(for='bandera') Bandera:
-                input(type='number', name='bandera', placeholder='Bandera', required)
-                label Error:
-                select(name='error', required)
-                  each val in ['0.01','0.025','0.05','0.1']
-                    option(value=val)= val
-              .subtitle Iteraciones:
-              .section
-                label(for='semillas') Cantidad:
-                input#semillas(type='number', name='semillas', value='1', min='1', placeholder='Semillas')
-                #nsemillas
-              a#calRanking(href='', class='button') calcular
-              a#resetFormTablero(href='', class='button') Restablecer
-          .preview
-            h2.title Vista Previa
-            .section
-              p {
-              p  Modulo:
-                #obserMod
-                | ,
-              p  Cantidad: ,
-              p  Bandera: ,
-              p  Error: ,
-              p  Semillas: [eeee eeeee eeee]
-              p }
+        include templates/tablero.pug
     .secciones
         h1#casos casos
     section.container
       .row
-      include templates/casos.pug
+        include templates/casos.pug
     .secciones
       h1#informe informe
     section.container
       .row
-        #ranking
+        include templates/informe.pug
     .secciones
       h1#acerca acerca de
+        include templates/acerca.pug
     .footer
       #footer  © copyright
 

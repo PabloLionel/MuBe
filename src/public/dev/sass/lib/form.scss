@@ -7,8 +7,8 @@
     font-size: 1.5em;
   }
   .form{
-    @include from(m){@include toLeft(50%,0);}
-    box-shadow: 0 0 0 2px $bg-2;
+    &.vertical{@include from(m){@include toLeft(50%,0);}}
+    box-shadow: 0 0 0 2px $bg-2 inset;
     border-radius: $b-radius;
     padding: 5px;
     color: $tx-6;
@@ -42,6 +42,10 @@
           border: 0;
           border-bottom: 1px solid $tx-5;
         }
+        .section{
+          padding: $pad * 1.3;
+          border: 1px solid darken($bg-seg, 20);
+        }
       }
     }
   }
@@ -51,6 +55,7 @@
     padding: 5px;
     .section{
       font-size: 22px;
+      @include to(950px){font-size: 16px;}
       background-color: $bg-seg;
       padding: 8px;
       p{padding-left: 26px;}
