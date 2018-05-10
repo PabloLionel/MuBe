@@ -4,7 +4,7 @@ su responsabilidad es la de configurar
 las dependencias del proyecto, ya sea
 que estemos usando un Framework, una
 Biblioteba (library o lib), o cualquier
-otra tecnología.
+otra tecnologia.
 """
 class Setup:
   """

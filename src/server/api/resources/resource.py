@@ -3,12 +3,12 @@ Resources(Recursos):
   Consideraciones IS:
     - NO se procesa BL (logica de negocio), solo es prepara.
     - A mas de 20 clcases separar en otro modulo.
-    - Su responsabilidad es preparar la petición (ej: si para una peticion
-    necesito un "id" voy a mirar que el "id" haya llegado).
+    - Su responsabilidad es preparar la peticion (ej: si para una peticion
+    necesito un 'id' voy a mirar que el 'id' haya llegado).
         En otras palabras vemos que llegue todo en regla.
     - Se va a apollar en un paquete de excepciones para lanzar los try catch.
 resources es la capa de presentacion
-aquí se contemplan todas las vistas tomando en cuenta lo que devuelve
+aqui se contemplan todas las vistas tomando en cuenta lo que devuelve
 mi api rest (para este caso devolvemos JSONs, entonces los json son nuestras
 vistas de procesar un resultado).
 cabe aclarar que esta vista no sera humana, sino que sera para otra maquina.
@@ -53,7 +53,7 @@ class Resultado:
     # Instanciacion de las clases
     mul = GeneradorMultiplicativo()
     test = TestChi()
-    print(modulo,cant,a,semilla,error)
+    # print(modulo,cant,a,semilla,error)
     # genera todas las series con los parametros recibidos
     todas_series = mul.generarSeries(modulo, cant, a, semilla)
 
@@ -219,11 +219,11 @@ class Resultado:
 
 #resul = Resultado()
 
-cantPedi = 5
-pepe = [
-  {'stock': 400, 'pedido': [550, 278, 196]},
-  {'pedido': 12, 'stock': [36, 45, 52]}
-]
+# cantPedi = 5
+# pepe = [
+#   {'stock': 400, 'pedido': [550, 278, 196]},
+#   {'pedido': 12, 'stock': [36, 45, 52]}
+# ]
 #print(resul.respuestaChicuadrado(1000, 365, 13, [251, 252, 362, 455, 741], 0.1))
 #print(resul.respuestaIndice(1000, 2, 13, [251, 257], 0.01))
 #print(resul.respuestaInvNormal(1000, 20, 13, [257, 135, 251, 200], [2, 3, 4], [0.30, 0.40, 0.30], 150, 25, pepe, cantPedi))

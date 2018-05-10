@@ -10,4 +10,4 @@ class Entitie:
   asp = Aspect()
 
   def __init__(self):
-    super(Entitie, self).__init__()
+    pass
