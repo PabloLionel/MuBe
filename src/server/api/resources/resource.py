@@ -53,7 +53,7 @@ class Resultado:
     # Instanciacion de las clases
     mul = GeneradorMultiplicativo()
     test = TestChi()
-    print(modulo,cant,a,semilla,error)
+    #print(modulo,cant,a,semilla,error)
     # genera todas las series con los parametros recibidos
     todas_series = mul.generarSeries(modulo, cant, a, semilla)
 

@@ -1,9 +1,16 @@
-from flask import Flask, request
-from api import api
+from flask import Flask, request, render_template, jsonify
 import json
 from api.resources.resource import Resultado
+#from api.config.cors import crossdomain
+
+api = Flask(__name__)
+#from api. import Resultado
 # muestra = Resultado()
 # print(muestra.respuestaChicuadrado(1000, 365, 13, [251, 252, 362, 455, 741], 0.1))
+@api.route("/")
+def index():
+  return render_template('index.html')
+
 data = {
   'modulo': 1000,
   'cant': 36,
@@ -27,12 +34,26 @@ def chi():
       )
     )
 
-
+#@crossdomain(origin='*')
 @api.route("/test", methods=['POST'])
-@crossdomain(origin='*')
 def test():
-  print(json.loads(request.data))
-  return json.dumps({'cualquier': 'verdura'})
+  jso = json.loads(request.data)
+  print(jso)
+  user = jso['user']
+  password = jso['password']
+
+  return jsonify(first_name=user, last_name=password)
+
+  # data = request.get_json()
+  # result = ''
+  # for item in data:
+  #   result += str(item['make']) + '\n'
+  # return result
+  # user =  request.form['mama'];
+  # password = request.form['jesu'];
+  # return json.dumps({'status':'OK','user':user,'pass':password});
+  # print(json.loads(request.data))
+  # return json.dumps({'cualquier': 'verdura'})
 
 
 
