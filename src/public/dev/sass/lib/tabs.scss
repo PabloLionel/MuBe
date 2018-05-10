@@ -1,0 +1,28 @@
+@mixin tab($head,$item,$bg-head,$bg-item,$color-hover,$border-color){
+  .#{$head}{
+    overflow: hidden;
+    border: 1px solid $border-color;
+    border-bottom: none;
+    background-color: $bg-head;
+    & button{
+      background-color: inherit;
+      float: left;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      padding: 14px 16px;
+      transition: 0.3s;
+      font-size: 17px;
+    }
+    & button:hover{background-color: $color-hover}
+    & button.active{background-color: $bg-item}
+  }
+  .#{$item}{
+    display: none;
+    padding: 6px 12px;
+    background: $bg-item;
+    border: 1px solid $border-color;
+    border-top: none;
+    &.active{display: block;}
+  }
+}

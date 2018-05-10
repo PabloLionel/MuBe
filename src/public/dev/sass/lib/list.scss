@@ -1,0 +1,22 @@
+@mixin list-container(){
+  ul,
+  ol{
+    @include reset-list()
+  }
+
+  .list{
+    .item{
+      &__title{
+        padding: 15px 2px;
+        font-size: 2em;
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+      padding: 12px 0;
+      box-shadow: 0 2px 0 0 $bg-5;
+      &:last-child{
+        margin-bottom: 15px;
+      }
+    }
+  }
+}

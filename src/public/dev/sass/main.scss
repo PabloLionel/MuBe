@@ -57,3 +57,18 @@ main{
     #000,
     30);
 }
+@import "lib/list";
+.list-container{
+  @include list-container;
+}
+@import "lib/tabs";
+.#{$tab-name}{
+  @include tab(
+    tab__head,//nombre de la clase donde estan los botones
+    tab__item,//nombre de la clase donde estan los contenidos
+    lighten($bg-2,10),//backgroun del
+    #fff,
+    lighten($bg-2,5),
+    #ccc
+    )
+}
