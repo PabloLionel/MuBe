@@ -1,5 +1,5 @@
 """
-aqui iría nuestra interacion con
+aqui iria nuestra interacion con
 la bese de datos.
 """
 from api.config.setup import Setup

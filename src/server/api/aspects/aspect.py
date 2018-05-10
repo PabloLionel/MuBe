@@ -9,7 +9,7 @@ por ej: si debemos medir los tiempos
 de alguna ejecucion escribimos la/s
 clase/s correspondientes a ello, si
 debemos implementar logs de otros
-modulos, de igual manera iran aquí.
+modulos, de igual manera iran aqui.
 Entonces tendremos clases para contro-
 lar tiempos, clases para los logs,
 etc.
