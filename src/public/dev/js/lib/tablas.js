@@ -1,73 +1,132 @@
-function newTableChi(frecuencia,valornpi){//tabla para el ranquing
-  let newTable = newElement('table')
-  //cabecera de la tabla
-  let thead = newElement('thead');
-  thead.innerHTML += '<tr> <th> </th> <th>f<sub>i</sub></th> <th>np<sub>i</sub></th> <th>f<sub>i</sub>-np<sub>i</sub></th> <th>(&phi;<sub>i</sub>)&sup2;</th> <th>(&phi;<sub>i</sub>)&sup2;/np<sub>i</sub></th> </tr>';
-  newTable.appendChild(thead)
-  //cuerpo de la tabla
-  let tbody = newElement('tbody');
-  //contador para la primera fila:
-  let j = 0;
-  //configuracion de decimales:
-  let decimales = 10000;
-  //verificamos que sea un iterable
-  if(!Array.isArray(frecuencia))
-    frecuencia = Array.prototype.slice.apply(frecuencia);//de no serlo lo convertimos a array
-  frecuencia.forEach(el=>{
-    // 3.3. cargo el cuerpo de la tabla con los datos de la frecuencia.
-    tbody.innerHTML += `
-      <tr>
-        <td>${j++}</td>
-        <td>${el}</td>
-        <td>${valornpi}</td>
-        <td>${Math.round((el-valornpi)*decimales)/decimales}</td>
-        <td>${Math.round(((el-valornpi)**2)*decimales)/decimales}</td>
-        <td>${Math.round((((el-valornpi)**2)/valornpi)*decimales)/decimales}</td>
-      </tr>
-      `;
-  })
-  newTable.appendChild(tbody);
-  let ctxTabre = newElement('div',[{
-      name: 'class',
-      val: 'table-container'
-    }
-  ]);
-  ctxTabre.appendChild(newTable);
-  return ctxTabre;
+function newRanking(data){
+  if(Array.isArray(data)){
+    //configuracion de decimales:
+    let decimales = 10000;//5decimales
+    return newComponentHTML({
+      el: 'div',
+      attrs: [{name: 'class', val: 'list-container'}],
+      child: [{
+        el: 'ol',
+        attrs: [{name: 'class', val: 'list'}],
+        child: data.map((el,key)=>({
+          el: 'li',
+          attrs: [{name: 'class',val: 'item'}],
+          text: 'Semilla utilizada: ' + el.semilla + ' , Chi-Cuadrado estimado: ' + el.valorChi + ' y fue ' + (el.aceptacion ? 'aceptado': 'rechazado'),
+          child: [{
+            el: 'button',
+            attrs: [{name: 'class', val: 'item__toggle'}],
+            text: '+'
+          },{
+            el: 'div',
+            attrs: [{name: 'class', val: 'item__content'}],
+            child: [{
+              el: 'div',
+              attrs: [{name: 'class', val: 'table-basic'}],
+              child: [{
+                el: 'table',
+                child: [{
+                    el: 'thead',
+                    child: [{
+                      el: 'tr',
+                      child: [{
+                        el: 'th'
+                      },{
+                        el: 'th',
+                        text: 'f',
+                        child: [{
+                          el: 'sub',
+                          text: 'i'
+                        }]
+                      },{
+                        el: 'th',
+                        text: 'np',
+                        child: [{
+                          el: 'sub',
+                          text: 'i'
+                        }]
+                      },{
+                        el: 'th',
+                        child:[{
+                          el: 'span',
+                          text: 'f'
+                        },{
+                          el: 'sub',
+                          text: 'i'
+                        },{
+                          el: 'span',
+                          text: '-np'
+                        },{
+                          el: 'sub',
+                          text: 'i'
+                        }]
+                      },{
+                        el: 'th',
+                        child: [{
+                          el:'span',
+                          text: '(Φ'
+                        },{
+                          el: 'sub',
+                          text: 'i'
+                        },{
+                          el: 'span',
+                          text: ')²'
+                        }]
+                      },{
+                        el: 'th',
+                        child: [{
+                          el: 'span',
+                          text: '(Φ'
+                        },{
+                          el: 'sub',
+                          text: 'i'
+                        },{
+                          el: 'span',
+                          text: ')²/np'
+                        },{
+                          el: 'sub',
+                          text: 'i'
+                        }]
+                      }]
+                    }]
+                  },{
+                    el: 'tbody',
+                    child: el.frecuencia.map((fr,i)=>({//filas de cada tabla
+                      el: 'tr',
+                      child: [{
+                        el: 'td',
+                        text: (i == 0 ? '0':i)
+                      },{
+                        el: 'td',
+                        text: (fr == 0 ? '0':fr)
+                      },{
+                        el: 'td',
+                        text: (el.valornpi == 0 ? '0':el.valornpi)
+                      },{
+                        el: 'td',
+                        text: ((Math.round((fr-el.valornpi)*decimales)/decimales) == 0? '0':(Math.round((fr-el.valornpi)*decimales)/decimales))
+                      },{
+                        el: 'td',
+                        text: ((Math.round(((fr-el.valornpi)**2)*decimales)/decimales) == 0? '0':(Math.round(((fr-el.valornpi)**2)*decimales)/decimales))
+                      },{
+                        el: 'td',
+                        text: ((Math.round((((fr-el.valornpi)**2)/el.valornpi)*decimales)/decimales) == 0 ? '0':(Math.round((((fr-el.valornpi)**2)/el.valornpi)*decimales)/decimales))
+                      }]
+                    }))
+                }]
+              }]
+            },{
+              el: 'div',
+              attrs: [{name: 'class', val: 'grafico-content'}],
+              child: [{
+                el:'canvas',
+                attrs: [{name: 'class', val: ('grafico-'+key)}]
+              }]
+            }]
+          }]
+        }))
+      }]
+    })
+  }else{
+    return new Error('Se esperaba un Arraglo!')
+  }
 }
-function newRanking(render, json){
-  // removemos los hijos antes de actualizar
-  removeChilds(render);
-  // extraemos información de JSON
-  let chi = json.chicuadrado;
-  let frecuencias = chi.map(el=>el.frecuencia);
-  let valornpis = chi.map(el=>el.valornpi);
-  //para extraer cada elemento de chi
-  let i=0;
-  if(!Array.isArray(chi))
-    chi = Array.prototype.slice.apply(chi);//de no serlo lo convertimos a array
-  // 1. agrego informacion de todos los resultados:
-  let info = newElement('div',[{name:'class',val:'ranking__info'}], 'algo');
-  render.appendChild(info);
-  // 2. genero la lista ordenada del ranking:
-  var listado = newElement('ol', [{name: 'class', val: 'list'}])
-
-  chi.forEach(el=>{
-    // agrego controles por cada item en la lista:
-    let li = newElement(
-      'li',
-      [{name: 'class',val: 'item'}],
-      'Semilla utilizada: ' + chi.semilla + ' , Chi-Cuadrado estimado: ' + chi.valorChi + ' y fue ' + chi.aceptacion
-    )
-      li.appendChild(newElement('button',[{name:'class',val:'item__toggle'}],'+'))
-      // 3.2. extraigo informacion de cada elemento de chi
-      var frecuencia = frecuencias[i];
-      var valornpi = valornpis[i];
-      //e incrementamos el contador para la proxima iteracion:
-      i++;
-      // 3.1. con cada elemento del arreglo genero una nueva tabla.
-      li.appendChild(newTableChi(frecuencia,valornpi));
-      listado.appendChild(li);
-  })
-  render.appendChild(listado);
-};

@@ -31,12 +31,17 @@
         border-bottom-right-radius: $b-radius;
         padding-bottom: $pad+8;
         font-size: 18px;
+        p{@include m-auto}
+        label,
         input,
         select{
           display: block;
           width: 90%;
           padding: 5px;
           @include m-auto;
+        }
+        input,
+        select{
           background-color: $bg-1;
           border-radius: $b-radius;
           border: 0;
@@ -75,6 +80,3 @@
   @content
 }
 
-.MBForm{
-  @include form();
-}

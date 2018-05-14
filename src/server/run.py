@@ -5,14 +5,16 @@ app = Flask(__name__)
 result = Resultado()
 
 @app.route('/')
-@crossdomain(origin='*')
+# @crossdomain(origin='*')
 def index():
   return ren('index.html')
 
 @app.route("/testChi", methods=['POST'])
-@crossdomain(origin='*')
+#@crossdomain(origin='*')
 def testChi():
   try:
+    print(req.json)
+    # print(req.data)
     return json.dumps(result.respuestaChicuadrado(int(req.json['modulo']),int(req.json['cant']),int(req.json['a']),req.json['semillas'],float(req.json['error'])))
   except Exception() as e:
     return json.dumps({'errorServer': e})

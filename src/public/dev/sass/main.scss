@@ -37,23 +37,29 @@ main{
   @include to(m){padding-top:50px;}
   @include from(m){margin-left:50px;}
 }
+.#{$container}{&.informes{min-height:80vh;}}
 @import "lib/form";
+.MBForm{
+  @include form();
+}
 @import "lib/buttons";
+
 .secciones{
+  &.informes{min-width:80vh;}
   @include secciones;
 }
 .footer{
-  @include footer();
+  @include footer;
 }
 @import "lib/table";
 .#{$table-name}{
   @include table(
     1063px, // brack Point del borde
-    ((135px+10*2)*6),
+    ((70px+10*2)*6),
     10px,
-    130px,// ancho de la columnas (ancho = )
+    30px,// ancho de la columnas (ancho = )
     20px,
-    $bg-4,
+    lighten($bg-5,23),// darken($bg-4,10),
     #000,
     30);
 }

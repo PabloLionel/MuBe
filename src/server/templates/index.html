@@ -1,21 +1,344 @@
-<!DOCTYPE html>
+
 <html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Pruebin</title>
-</head>
-<body>
-<h1>Vamos</h1>
-<!--<button id="ajax">Solicitar</button>-->
-<form class="form-signin"  role="form">
-  <input type="email" id="txtUsername" name="username" class="form-control" placeholder="Email address" required autofocus>
-  <input type="password" id="txtPassword" name="password" class="form-control" placeholder="Password" required>
-  <button id="enviar" type="button">Enviar</button>
-</form>
-<div id="resultado"></div>
-<script src="{{url_for('static', filename='js/jquery.js')}}"></script>
-<script type="text/javascript" src="{{url_for('static', filename='js/mube.js')}}"></script>
-</body>
+  <head>
+    <meta charset="UTF-8"/>
+    <title>MuBe</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/main.min.css')}}"/>
+    <!-- <link rel="icon" type="image/ico" href="{{url_for('static', filename='favicon.ico')}}"/> -->
+  </head>
+  <body>
+    <div class="menu__content">
+      <div class="toggle">
+        <div class="line"></div>
+      </div>
+      <ul>
+        <li><a class="item" href="/" id="linkIndex">tablero</a></li>
+        <li><a class="item" href="/#casos" id="">casos</a></li>
+        <li><a class="item" href="/#informe" id="">informes</a></li>
+        <li><a class="item" href="/#acerca" id="">acerca de</a></li>
+      </ul>
+    </div>
+    <main>
+      <div class="secciones">
+        <h1 id="tablero">tablero</h1>
+      </div>
+      <section class="container">
+        <div class="row">
+          <div class="MBForm">
+            <div class="form vertical">
+              <h2 class="title">Test Chi-Cuadrado</h2>
+              <form action="">
+                <div class="subtitle">Experimento:</div>
+                <div class="section">
+                  <label for="modulo">Modulo:</label>
+                  <input type="number" name="modulo" placeholder="Modulo" required="required"/>
+                  <label for="cant">Cantidad:</label>
+                  <input type="number" name="cant" placeholder="Cantidad" required="required"/>
+                  <label for="bandera">Bandera:</label>
+                  <input type="number" name="bandera" placeholder="Bandera" required="required"/>
+                  <label>Error:</label>
+                  <select name="error" required="required">
+                    <option value="0.01">0.01</option>
+                    <option value="0.025">0.025</option>
+                    <option value="0.05">0.05</option>
+                    <option value="0.1">0.1</option>
+                  </select>
+                </div>
+                <div class="subtitle">Iteraciones:</div>
+                <div class="section">
+                  <label for="semillas">Cantidad:</label>
+                  <input id="semillas" type="number" name="semillas" value="1" min="1" placeholder="Semillas"/>
+                  <div id="nsemillas"></div>
+                </div><a class="button" id="calRanking" href="">calcular</a><a class="resetFormTablero button">Restablecer</a>
+              </form>
+            </div>
+            <div class="preview">
+              <h2 class="title">Vista Previa</h2>
+              <div class="section">
+                <p>{</p>
+                <p> Modulo: <span id='obserMod'></span>,</p>
+                <p> Cantidad: <span id='obserCant'></span>,</p>
+                <p> Bandera: <span id='obserB'></span>,</p>
+                <p> Error: <span id='obserErr'></span>,</p>
+                <p> Semillas: <span id='obserSem'></span></p>
+                <p>}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div class="secciones">
+        <h1 id="casos">casos</h1>
+      </div>
+      <section class="container">
+        <div class="row">
+          <div class="list-container">
+            <ol class="list">
+              <li class="item">
+                <h2 class="item__title">Ruleta:</h2>
+                <div class="item__contend" id="ruleta">
+                  <div class="MBForm">
+                    <div class="form">
+                      <form>
+                        <div class="subtitle">Parametros de prueba:</div>
+                        <div class="section">
+                          <label for="modulo">Modulo:</label>
+                          <input type="number" name="modulo" placeholder="Modulo" required="required"/>
+                          <label for="cant">Cantidad:</label>
+                          <input type="number" name="cant" placeholder="Cantidad" required="required"/>
+                          <label for="bandera">Bandera:</label>
+                          <input type="number" name="bandera" placeholder="Bandera" required="required"/>
+                          <label for="semilla">Semilla:</label>
+                          <input type="number" name="semilla" placeholder="semilla" required="required"/>
+                        </div><a class="button" id="calRuleta" href="">calcular</a><a class="button" id="resetFormTablero" href="">Restablecer</a>
+                      </form>
+                    </div>
+                  </div><br/>
+                  <div class="table-basic">
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>X</th>
+                          <th>0</th>
+                          <th> 00</th>
+                          <th>1</th>
+                          <th>2</th>
+                          <th>3</th>
+                          <th>4</th>
+                          <th>5</th>
+                          <th>6</th>
+                          <th>7</th>
+                          <th>8</th>
+                          <th>9</th>
+                          <th>10</th>
+                          <th>11</th>
+                          <th>12</th>
+                          <th>13</th>
+                          <th>14</th>
+                          <th>15</th>
+                          <th>16</th>
+                          <th>17</th>
+                          <th>18</th>
+                          <th>19</th>
+                          <th>20</th>
+                          <th>21</th>
+                          <th>22</th>
+                          <th>23</th>
+                          <th>24</th>
+                          <th>25</th>
+                          <th>26</th>
+                          <th>27</th>
+                          <th>28</th>
+                          <th>29</th>
+                          <th>30</th>
+                          <th>31</th>
+                          <th>32</th>
+                          <th>33</th>
+                          <th>34</th>
+                          <th>35</th>
+                          <th>36</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>p</td>
+                          <td>1/38</td>
+                          <td>1/38</td>
+                          <td>1/38</td>
+                          <td>1/38</td>
+                          <td>1/38</td>
+                          <td>1/38</td>
+                          <td>1/38</td>
+                          <td>1/38</td>
+                          <td>1/38</td>
+                          <td>1/38</td>
+                          <td>1/38</td>
+                          <td>1/38</td>
+                          <td>1/38</td>
+                          <td>1/38</td>
+                          <td>1/38</td>
+                          <td>1/38</td>
+                          <td>1/38</td>
+                          <td>1/38</td>
+                          <td>1/38</td>
+                          <td>1/38</td>
+                          <td>1/38</td>
+                          <td>1/38</td>
+                          <td>1/38</td>
+                          <td>1/38</td>
+                          <td>1/38</td>
+                          <td>1/38</td>
+                          <td>1/38</td>
+                          <td>1/38</td>
+                          <td>1/38</td>
+                          <td>1/38</td>
+                          <td>1/38</td>
+                          <td>1/38</td>
+                          <td>1/38</td>
+                          <td>1/38</td>
+                          <td>1/38</td>
+                          <td>1/38</td>
+                          <td>1/38</td>
+                          <td>1/38</td>
+                        </tr>
+                        <tr>
+                          <td>F</td>
+                          <td>1/38</td>
+                          <td>2/38</td>
+                          <td>3/38</td>
+                          <td>4/38</td>
+                          <td>5/38</td>
+                          <td>6/38</td>
+                          <td>7/38</td>
+                          <td>8/38</td>
+                          <td>9/38</td>
+                          <td>10/38</td>
+                          <td>11/38</td>
+                          <td>12/38</td>
+                          <td>13/38</td>
+                          <td>14/38</td>
+                          <td>15/38</td>
+                          <td>16/38</td>
+                          <td>17/38</td>
+                          <td>18/38</td>
+                          <td>19/38</td>
+                          <td>20/38</td>
+                          <td>21/38</td>
+                          <td>22/38</td>
+                          <td>23/38</td>
+                          <td>24/38</td>
+                          <td>25/38</td>
+                          <td>26/38</td>
+                          <td>27/38</td>
+                          <td>28/38</td>
+                          <td>29/38</td>
+                          <td>30/38</td>
+                          <td>31/38</td>
+                          <td>32/38</td>
+                          <td>33/38</td>
+                          <td>34/38</td>
+                          <td>35/38</td>
+                          <td>36/38</td>
+                          <td>37/38</td>
+                          <td>38/38</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div id="ruletaSerGen"></div>
+                </div>
+              </li>
+              <li class="item">
+                <h2 class="item__title">Inventario(Normal):</h2>
+                <div class="item__contend" id="invent">
+                  <div class="MBForm">
+                    <div class="form">
+                      <form>
+                        <div class="subtitle">Parametros de la Serie a Generar:</div>
+                        <div class="section">
+                          <label for="modulo">Modulo:</label>
+                          <input type="number" name="modulo" placeholder="Modulo" required="required"/>
+                          <label for="cant">Cantidad:</label>
+                          <input type="number" name="cant" placeholder="Cantidad" required="required"/>
+                          <label for="bandera">Bandera:</label>
+                          <input type="number" name="bandera" placeholder="Bandera" required="required"/>
+                          <label for="semilla">Semilla:</label>
+                          <input type="number" name="semilla" placeholder="semilla" required="required"/>
+                        </div>
+                        <div class="subtitle">Parametros de Experimentos:</div>
+                        <div class="section">
+                          <div class="section">
+                            <p class="full">Experimento 1</p>
+                            <input type="number" name="stock" placeholder="stock" required="required"/>
+                            <p class="full">corridas</p>
+                            <label for="pedidos">Cantidades de Puntos de Pedido:</label>
+                            <input id="cantPed" type="number" name="pedidos" placeholder="Puntos de reposición" min="1" value="1" required="required"/>
+                            <div id="inputsPed"></div>
+                          </div>
+                          <div class="section">
+                            <p class="full">Experimento 2</p>
+                            <label for="pedido">Punto de Pedido a Analizar:</label>
+                            <input type="number" name="pedido" placeholder="Pedido" required="required"/>
+                            <p class="full">corridas</p>
+                            <label for="stocks">Cantidades de Stocks:</label>
+                            <input id="cantStock" type="number" name="stocks" placeholder="Stocks" min="1" value="1" required="required"/>
+                            <div id="inputsStock"></div>
+                          </div>
+                        </div><a class="button" id="calInventario" href="">calcular</a><a class="button" id="resetFormTablero" href="">Restablecer</a>
+                      </form>
+                    </div>
+                  </div>
+                  <div id="experimentos"></div>
+                </div>
+              </li>
+              <li class="item">
+                <h2 class="item__title">Inventario(Poison):</h2>
+                <div class="item__contend" id="invent">
+                  <div class="MBForm">
+                    <div class="form">
+                      <form>
+                        <div class="subtitle">Parametros de la Serie a Generar:</div>
+                        <div class="section">
+                          <label for="modulo">Modulo:</label>
+                          <input type="number" name="modulo" placeholder="Modulo" required="required"/>
+                          <label for="cant">Cantidad:</label>
+                          <input type="number" name="cant" placeholder="Cantidad" required="required"/>
+                          <label for="bandera">Bandera:</label>
+                          <input type="number" name="bandera" placeholder="Bandera" required="required"/>
+                          <label for="semilla">Semilla:</label>
+                          <input type="number" name="semilla" placeholder="semilla" required="required"/>
+                        </div>
+                        <div class="subtitle">Parametros de Experimentos:</div>
+                        <div class="section">
+                          <div class="section">
+                            <p class="full">Experimento 1</p>
+                            <label for="pedidos">Stock a Analizar:</label>
+                            <input type="number" name="stock" placeholder="stock" required="required"/>
+                            <p class="full">corridas</p>
+                            <label for="pedidos">Cantidades de Puntos de Pedido:</label>
+                            <input id="cantPed" type="number" name="pedidos" placeholder="Puntos de reposición" min="1" value="1" required="required"/>
+                            <div id="inputsPed"></div>
+                          </div>
+                          <div class="section">
+                            <p class="full">Experimento 2</p>
+                            <label for="pedido">Punto de Pedido a Analizar:</label>
+                            <input type="number" name="pedido" placeholder="Pedido" required="required"/>
+                            <p class="full">corridas</p>
+                            <label for="stocks">Cantidades de Stocks:</label>
+                            <input id="cantStock" type="number" name="stocks" placeholder="Stocks" min="1" value="1" required="required"/>
+                            <div id="inputsStock"></div>
+                          </div>
+                        </div><a class="button" id="calInventario" href="">calcular</a><a class="button" id="resetFormTablero" href="">Restablecer</a>
+                      </form>
+                    </div>
+                  </div>
+                  <div id="experimentos"></div>
+                </div>
+              </li>
+              <li class="item">
+                <h2 class="item__title">Metodo de los Indices:</h2>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </section>
+      <div class="secciones">
+        <h1 id="informe">informe</h1>
+      </div>
+      <section class="container informes">
+        <div class="row">
+          <div id="newRanking"></div>
+        </div>
+      </section>
+      <div class="secciones">
+        <h1 id="acerca">acerca de</h1>
+      </div>
+      <div class="footer">
+        <div id="footer"> © copyright</div>
+      </div>
+    </main>
+  </body>
+  <script type="text/javascript" src="{{url_for('static', filename='js/all.js')}}"></script>
 </html>
