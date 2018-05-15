@@ -1,3 +1,6 @@
+var resultadoRancking = JSON.parse('{"chicuadrado": [{"aceptacion": true, "frecuencia": [1, 8, 4, 8, 4, 5, 3, 9, 3, 9], "semilla": 251, "serie": [263, 419, 447, 811, 543, 59, 767, 971, 623, 99, 287, 731, 503, 539, 7, 91, 183, 379, 927, 51], "serie0y1": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "valorChi": 11, "valornpi": 5}, {"aceptacion": true, "frecuencia": [2, 10, 3, 8, 2, 3, 4, 12, 7, 8], "semilla": 137, "serie": [781, 153, 989, 857, 141, 833, 829, 777, 101, 313, 69, 897, 661, 593, 709, 217, 821, 673, 749, 737], "serie0y1": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "valorChi": 18, "valornpi": 5}]}')
+function each(iter,fn){Array.prototype.forEach.call(iter,el=>fn(el))}
+
 String.prototype.capitalize = function() {
   return this.replace(/(?:^|\s)\S/g, function(a){return a.toUpperCase()})
 }
@@ -8,122 +11,26 @@ function addChilds(node,childs) {
   childs = Array.isArray(childs) ? childs : Array.prototype.slice.apply(childs);
   childs.forEach(el=>node.appendChild(el));
 };
+function isElement(o){
+  return (typeof HTMLElement === "object" ? o instanceof HTMLElement : //DOM2
+    o && typeof o === "object" && o !== null && o.nodeType === 1 && typeof o.nodeName==="string")
+}
 function newElement(el, attr, text) {
   let elm = document.createElement(el)
   if(text)
     elm.appendChild(document.createTextNode(text))
-  attr.forEach(at => elm.setAttribute(at.name, at.val))
+  if(Array.isArray(attr))
+    attr.forEach(at => elm.setAttribute(at.name, at.val))
   return elm
 }
-function newComponentHTML(els){
-  'use strict'
-  if(!Array.isArray(els.child)){
-    return newElement(els.el,els.attrs,els.text)
-  }else{
-    let node = newElement(els.el,els.attrs,els.text)
-    els.child.forEach(el=>node.appendChild(newComponentHTML(el)))
-    return node
-  }
+function newComponentHTML(els) {
+  let node = isElement(els) ? els: newElement(els.el, els.attrs, els.text)
+  if (Array.isArray(els.child)) {
+      els.child.forEach(el => node.appendChild(newComponentHTML(el)))
+  }//else if (isElement(els.child)) { node.appendChild(els.child) }
+  return node
 }
-// Ejemplo de caso de uso
-// let elem = newComponentHTML(
-//   {
-//     el: 'span',
-//     attrs: [
-//         {
-//             name: 'id',
-//             val: 'test'
-//         }, {
-//             name: 'class',
-//             val: 'prueba'
-//         }
-//     ],
-//     text: 'hola ',
-//     child: [{
-//       el: 'b',
-//       attrs: [],
-//       text: 'jeje'
-//     },{
-//       el: 'p',
-//       attrs: [],
-//       text: 'jeje'
-//     }]
-//   }
-// )
 
-function newTableChi(frecuencia,valornpi){//tabla para el ranquing
-  let newTable = newElement('table')
-  //cabecera de la tabla
-  let thead = newElement('thead');
-  thead.innerHTML += '<tr> <th> </th> <th>f<sub>i</sub></th> <th>np<sub>i</sub></th> <th>f<sub>i</sub>-np<sub>i</sub></th> <th>(&phi;<sub>i</sub>)&sup2;</th> <th>(&phi;<sub>i</sub>)&sup2;/np<sub>i</sub></th> </tr>';
-  newTable.appendChild(thead)
-  //cuerpo de la tabla
-  let tbody = newElement('tbody');
-  //contador para la primera fila:
-  let j = 0;
-  //configuracion de decimales:
-  let decimales = 10000;
-  //verificamos que sea un iterable
-  if(!Array.isArray(frecuencia))
-    frecuencia = Array.prototype.slice.apply(frecuencia);//de no serlo lo convertimos a array
-  frecuencia.forEach(el=>{
-    // 3.3. cargo el cuerpo de la tabla con los datos de la frecuencia.
-    tbody.innerHTML += `
-      <tr>
-        <td>${j++}</td>
-        <td>${el}</td>
-        <td>${valornpi}</td>
-        <td>${Math.round((el-valornpi)*decimales)/decimales}</td>
-        <td>${Math.round(((el-valornpi)**2)*decimales)/decimales}</td>
-        <td>${Math.round((((el-valornpi)**2)/valornpi)*decimales)/decimales}</td>
-      </tr>
-      `;
-  })
-  newTable.appendChild(tbody);
-  let ctxTabre = newElement('div',[{
-      name: 'class',
-      val: 'table-container'
-    }
-  ]);
-  ctxTabre.appendChild(newTable);
-  return ctxTabre;
-}
-function newRanking(render, json){
-  // removemos los hijos antes de actualizar
-  removeChilds(render);
-  // extraemos información de JSON
-  let chi = json.chicuadrado;
-  let frecuencias = chi.map(el=>el.frecuencia);
-  let valornpis = chi.map(el=>el.valornpi);
-  //para extraer cada elemento de chi
-  let i=0;
-  if(!Array.isArray(chi))
-    chi = Array.prototype.slice.apply(chi);//de no serlo lo convertimos a array
-  // 1. agrego informacion de todos los resultados:
-  let info = newElement('div',[{name:'class',val:'ranking__info'}], 'algo');
-  render.appendChild(info);
-  // 2. genero la lista ordenada del ranking:
-  var listado = newElement('ol', [{name: 'class', val: 'list'}])
-
-  chi.forEach(el=>{
-    // agrego controles por cada item en la lista:
-    let li = newElement(
-      'li',
-      [{name: 'class',val: 'item'}],
-      'Semilla utilizada: ' + chi.semilla + ' , Chi-Cuadrado estimado: ' + chi.valorChi + ' y fue ' + chi.aceptacion
-    )
-      li.appendChild(newElement('button',[{name:'class',val:'item__toggle'}],'+'))
-      // 3.2. extraigo informacion de cada elemento de chi
-      var frecuencia = frecuencias[i];
-      var valornpi = valornpis[i];
-      //e incrementamos el contador para la proxima iteracion:
-      i++;
-      // 3.1. con cada elemento del arreglo genero una nueva tabla.
-      li.appendChild(newTableChi(frecuencia,valornpi));
-      listado.appendChild(li);
-  })
-  render.appendChild(listado);
-};
 function addInputs(num,label,inputs){
   //  retornamos el estado de los nuevos inputs:
   let state = []

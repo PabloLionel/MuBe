@@ -1,23 +1,24 @@
 @mixin table($bp-border,$min-w,$p,$col-w-first,$height-line,$bg,$color,$harmony){
   width: 100%;
   overflow-x: auto;
-  @include from($bp-border){border: 1px solid $bg;}
+  overflow-y: hidden;
   table{
     margin-left:auto;
     margin-right:auto;
     min-width:$min-w;
     border-collapse: collapse;
     background: #fff;
-    @include to($bp-border+1){border: 1px solid $bg;}
-    th,td{
+    th,
+    td{
       padding:$p;
       line-height: $height-line;
+      text-align: center;
     }
     thead{
+      th{color: #fff}
       tr{
         th{
           background-color: $bg;
-          text-align: center;
           &:first-child{width: $col-w-first+($p*2);}
         }
       }
