@@ -6,7 +6,7 @@ function testChi(mod, can, ban, semis, err){
     semillas: semis,//[255, 362, 124, 123],
     error: err//0.1
   }
-  return consultaServer('/testChi', chi)
+  return consultaServer('/testChi', chi);
 }
 
 function ruleta(mod, can, ban, semis){
@@ -46,27 +46,34 @@ function normal(mod, can, ban, semi, x, px, mu, sigma, stockPedi, cantPedi){
   return consultaServer('/normal', norm)
 }
 
-function InvParcial(mod, can, ban, semi, x1, px1, x2, px2, stockPedi){
+function invParcial(mod, can, ban, semi, x1, px1, x2, px2, stockPedi){
   var inv = {
     modulo: mod,
     cant: can,
     a: ban,
     semillas: semi,
     x1: x1,
-    px1: px2,
+    px1: px1,
     x2: x2,
     px2: px2,
-    dic:[
-    {
-      'pedido':10,
-      'stock': [20, 35, 40]
-    },{
-      'stock':25,
-      'pedido': [19, 82, 50]
-    }
-    ]
+    dic: stockPedi
   }
   return consultaServer('/inventarioParcial', inv)
+}
+
+function invPoisson(mod, can, ban, semi, x1, px1, lamb, stockPedi, cantPedi){
+  var pois = {
+    modulo: mod,
+    cant: can,
+    a: ban,
+    semillas: semi,
+    x1: x1,
+    px1: px1,
+    lambda: lamb,
+    px2: px2,
+    stockPedido: stockPedi,
+    cantPedido: cantPedi
+  }
 }
 // var req = new XMLHttpRequest();
 //   var solicitar = (url, send, f)=>{req.open('POST', url, true); req.setRequestHeader("Content-Type", "application/json; charset=UTF-8"); req.send(JSON.stringify(send));req.onload = f;}

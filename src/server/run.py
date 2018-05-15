@@ -49,7 +49,7 @@ def normal():
   # {modulo: 1000,cant: 10,a: 13,semillas: [250],x: [2, 3, 4],px: [0.30, 0.40, 0.30],mu: 150,sigma: 25,stockPedido: [{'stock': 400, 'pedido': [550, 278, 196]},{'pedido': 12, 'stock': [36, 45, 52]}],cantPedido: 25}
 
 @app.route("/inventarioParcial", methods=['POST'])
-@crossdomain(origin='*')
+#@crossdomain(origin='*')
 def respuestaInvParcial():
   try:
     return json.dumps(result.respuestaInvParcial(int(req.json['modulo']),int(req.json['cant']),int(req.json['a']),req.json['semillas'],req.json['x1'],req.json['px1'],req.json['x2'],req.json['px2'],req.json['dic']))
