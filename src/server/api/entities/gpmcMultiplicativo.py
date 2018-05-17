@@ -60,4 +60,4 @@ class GeneradorMultiplicativo:
     }
 
 # pe = GeneradorMultiplicativo()
-# print(pe.generadorSerie(1000, 3, 13, 25))
+# print(pe.generarSeries(1000, 3, 13, [25]))

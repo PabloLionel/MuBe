@@ -171,7 +171,7 @@ class Resultado:
 
     # genera todas las series con los parametros recibidos
     todas_series = mul.generarSeries(int(modulo), int(cant), int(a), semilla)
-    print(todas_series)
+
     # se asigna la serie series0y1 generada
     arreglos0y1 = todas_series['series0y1'][0]
 
@@ -227,6 +227,6 @@ pepe = [
 #print(resul.respuestaChicuadrado(1000, 365, 13, [251, 252, 362, 455, 741], 0.1))
 #print(resul.respuestaIndice(1000, 2, 13, [251, 257], 0.01))
 #print(resul.respuestaInvNormal(1000, 20, 13, [257, 135, 251, 200], [2, 3, 4], [0.30, 0.40, 0.30], 150, 25, pepe, cantPedi))
-resul.respuestaInvParcial(1000, 20, 13, [257], [2, 3, 4], [0.30, 0.40, 0.30], [1, 2, 3, 4, 5, 6, 7, 8, 9], [0.135, 0.271, 0.271, 0.180, 0.090, 0.036, 0.012, 0.004, 0.001], pepe)
+#resul.respuestaInvParcial(1000, 20, 13, [257], [2, 3, 4], [0.30, 0.40, 0.30], [1, 2, 3, 4, 5, 6, 7, 8, 9], [0.135, 0.271, 0.271, 0.180, 0.090, 0.036, 0.012, 0.004, 0.001], pepe)
 #print(resul.respuestaInvPoisson(1000, 20, 13, [257, 135, 251, 200], [2, 3, 4], [0.40, 0.50, 0.10], 5, pepe, 4))
 #print(resul.respuestaCasoRuleta(1000, 38, 13, [251]))

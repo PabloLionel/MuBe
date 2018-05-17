@@ -256,7 +256,7 @@ formInvParcial.calcular.addEventListener('click', e => {
   req.onload = () => {
     if (req.status >= 200 && req.status < 400) {
       var request = JSON.parse(req.response)
-      newInfo.appendChild(newInvParcial(request))
+      newInfo.appendChild(newInvParcial(request.inventario))
       // cargarGraficosChi(request.chicuadrado)
     } else { console.error('Error en la conexion! Estado: ' + req.status) }
   }
