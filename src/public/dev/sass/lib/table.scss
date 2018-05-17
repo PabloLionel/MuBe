@@ -3,11 +3,11 @@
   overflow-x: auto;
   overflow-y: hidden;
   table{
-    margin-left:auto;
-    margin-right:auto;
     min-width:$min-w;
     border-collapse: collapse;
     background: #fff;
+    border:1px solid $bg;
+    border-left:0;
     th,
     td{
       padding:$p;
@@ -38,9 +38,29 @@
         &:nth-child(even){background-color: lighten($bg,$harmony);}
         &:first-child{
           position:absolute;
+          width: $col-w-first+($p*2);
+          background-color: #fff;
+          border-left:1px solid $bg
+        }
+      }
+    }
+    tbody.sencillo{
+      tr{
+        &:hover{
+          background-color: lighten($bg,$harmony);
+          td:first-child{background-color: $bg;}
+        }
+        &:first-child{
+          td:first-child{box-shadow: 0 0 0 0 $bg;}
+        }
+      }
+      td{
+        &:nth-child(even){background-color: lighten($bg,$harmony);}
+        &:first-child{
           background-color: #fff;
         }
       }
     }
   }
+  @content
 }

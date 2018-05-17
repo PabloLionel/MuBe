@@ -63,6 +63,27 @@ main{
     #000,
     30);
 }
+.#{$table-name}-invPar{
+  @include table(
+    1063px, // brack Point del borde
+    ((70px+10*2)*6),
+    10px,
+    241px,// ancho de la columnas (ancho = )
+    20px,
+    lighten($bg-5,23),// darken($bg-4,10),
+    #000,
+    30);
+  table{
+    @include m-auto();
+  }
+}
+.tInvPar{
+  min-height: 300px;
+  >*{
+    margin-top: 10px;
+    @include from(l){@include toLeft(50%,0);}
+  }
+}
 @import "lib/list";
 .list-container{
   @include list-container;

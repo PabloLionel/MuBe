@@ -1,50 +1,153 @@
-var resetFormTablero = document.getElementsByClassName('resetFormTablero')
-var forms = Array.prototype.slice.apply(document.getElementsByTagName('form'))
-var formsArr = Array.prototype.slice.apply(document.getElementsByTagName('form')).map(el=>Array.prototype.slice.apply(el).map(x=>x))
-var nsem = document.getElementById('semillas');//numero de semillas
-var inputsNSem = document.getElementById('nsemillas');//nuevos imputs
-var tableroCalcalRanking = document.getElementById('calRanking')
-var cajaDeInputs = addInputs(1,'semilla',inputsNSem);
-var deTablero = formsArr[0]
-var obserMod = document.getElementById('obserMod')
-var obserCant = document.getElementById('obserCant')
-var obserB = document.getElementById('obserB')
-var obserErr = document.getElementById('obserErr')
-var obserSem = document.getElementById('obserSem')
-var newRan = document.getElementById('newRanking')
-
-// console.log(deTablero, cajaDeInputs.map(x=>x.lenght>0?parseInt(x.value):0))
-nsem.addEventListener('click', e=>{
-  cajaDeInputs = addInputs(e.target.value,'semilla',inputsNSem)
-});
-nsem.addEventListener('keyup', e=>{
-  cajaDeInputs = addInputs(e.target.value,'semilla',inputsNSem)
-});
-newRan.appendChild(newRanking(resultadoRancking.chicuadrado))//habilitar para front-end
-tableroCalcalRanking.addEventListener('click',e=>{
-  e.preventDefault()
-  removeChilds(newRan)
-  req.open('POST', '/testChi', true );
-  req.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
-  req.onload = ()=>{
-    if (req.status >= 200 && req.status < 400){
-      var request = JSON.parse(req.response)
-      newRan.appendChild(newRanking(request.chicuadrado))
-    }else{console.error('Error en la conexion! estado: ' + req.status)}
-  }
-  req.send( JSON.stringify({modulo: $modulo,cant: $cant,a: $a,semillas: $semillas,error: $error}) );
-})
-forms[0].onfocus = setInterval(()=>{
-    obserMod.innerHTML = deTablero[0].value
-    obserCant.innerHTML = deTablero[1].value
-    obserB.innerHTML = deTablero[2].value
-    obserErr.innerHTML = deTablero[3].value
-    obserSem.innerHTML = cajaDeInputs.map(x=>!Number.isNaN(parseInt(x.value))?parseInt(x.value):0)
-  },5000)
-Array.prototype.forEach.call(resetFormTablero, function(el){
-  el.addEventListener('click',e=>{
+var req = new XMLHttpRequest()
+var newInfo = document.getElementById('newInfo')
+var forms = Array.prototype.slice.apply(document.getElementsByTagName('form')).map(
+  x => ({
+    id: x.dataset.id,
+    form: x,
+    imputs: Array.prototype.slice.apply(x).map(inp => inp),
+    calcular: Array.prototype.slice.apply(x.children).filter(x => x.classList.contains('calcular'))[0],
+    reset: Array.prototype.slice.apply(x.children).filter(x => x.classList.contains('reset'))[0]
+  })
+)
+console.log(forms)
+each(forms, el => {
+  console.log(el.reset)
+  el.reset.addEventListener('click', e => {
     e.preventDefault();
-    addInputs(1,'semilla',inputsNSem);
     e.target.parentElement.reset();
   })
-});
+})
+//[[[[[[[[[[[[[[[[[[[[[[[[Formulario para tablero]]]]]]]]]]]]]]]]]]]]]]]]
+var formRanking = getForm('ranking')
+var preview = Array.prototype.slice.apply(formRanking.form.parentElement.parentElement.children[1].children[1].children).slice(1, 6)
+var nsem = document.getElementById('nsemillas')
+var optionsRanking = Array.prototype.slice.apply(formRanking.imputs[3].children)
+var semillas = []
+on(formRanking.form, 'keyup', 'entrante', e => ranking(e))
+// on(formRanking.form,'click','entrante',e=>ranking(e))
+function ranking(e) {
+  switch (formRanking.imputs.indexOf(e.target)) {
+    case 0://Modulo
+      preview[0].innerHTML = 'Modulo: ' + formRanking.imputs[0].value + ','
+      break;
+    case 1://Cantidad
+      preview[1].innerHTML = 'Cantidad: ' + formRanking.imputs[1].value + ','
+      break;
+    case 2://Bandera
+      preview[2].innerHTML = 'Bandera: ' + formRanking.imputs[2].value + ','
+      break;
+    case 3://Error
+      preview[3].innerHTML = 'Error: ' + optionsRanking.filter(op => op.selected)[0].innerHTML + ','
+      break;
+    case 4://Semillas
+      semillas = addInputs(e.target.value, 'semilla', nsem)
+      let n = formRanking.imputs.length - 5
+      formRanking.imputs.splice(5, n)
+      each(semillas, el => {
+        el.classList.add('entrante')
+        formRanking.imputs.push(el)
+      })
+      preview[4].innerHTML = 'Semillas: ' + semillas.map(x => x.value)
+      break;
+    default:
+      preview[4].innerHTML = 'Semillas: ' + semillas.map(x => x.value)
+  }
+}
+formRanking.calcular.addEventListener('click', e => {
+  e.preventDefault()
+  removeChilds(newInfo)
+  req.open('POST', '/testChi', true);
+  req.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+  req.onload = () => {
+    if (req.status >= 200 && req.status < 400) {
+      var request = JSON.parse(req.response)
+      newInfo.appendChild(newRanking(request.chicuadrado))
+      // cargarGraficosChi(request.chicuadrado)
+    } else { console.error('Error en la conexion! estado: ' + req.status) }
+  }
+  req.send(JSON.stringify({
+    modulo: parseInt(formRanking.imputs[0].value),
+    cant: parseInt(formRanking.imputs[1].value),
+    a: parseInt(formRanking.imputs[2].value),
+    error: parseFloat(optionsRanking.filter(op => op.selected)[0].innerHTML),
+    semillas: semillas.map(x => parseInt(x.value))
+  })
+  )
+  window.scrollTo(0, document.getElementById('informe').getBoundingClientRect().y)
+})
+newInfo.appendChild(newRanking(resultadoRancking.chicuadrado))
+
+//[[[[[[[[[[[[[[[[[[[[[[[[Formulario para inventarioParcial]]]]]]]]]]]]]]]]]]]]]]]]
+var formInvParcial = getForm('inventarioParcial')
+var arrPedido = []
+const nPedidos = document.getElementById('nPedidos')
+var arrStock = []
+const nStock = document.getElementById('nStocks')
+
+on(formInvParcial.form, 'keyup', 'entrante', e => inventarioParcial(e))
+// on(inventarioParcial.form,'click','entrante',e=>inventarioParcial(e))
+function inventarioParcial(e) {
+  // console.log(e.target)
+  switch (formInvParcial.imputs.indexOf(e.target)) {
+    case 0://Modulo
+
+      break;
+    case 1://Cantidad
+
+      break;
+    case 2://Bandera
+
+      break;
+    case 3://Semilla
+
+      break;
+    case 4://Stock
+
+      break;
+    case 5://Pedidos
+      arrPedido = addInputs(formInvParcial.imputs[5].value,'pedido',nPedidos)
+      each(arrPedido, el => {el.classList.add('entrante') })
+      break;
+    case 6://Pedido
+
+      break;
+    case 7://Stocks
+      arrStock = addInputs(formInvParcial.imputs[7].value,'stock',nStock)
+      each(arrStock, el => {el.classList.add('entrante') })
+      break;
+    // default:
+    // console.log(e.target)
+    // preview[4].innerHTML = 'Semillas: ' + semillas.map(x=>x.value)
+  }
+}
+formInvParcial.calcular.addEventListener('click', e => {
+  e.preventDefault()
+  removeChilds(newInfo)
+  req.open('POST', '/inventarioParcial', true);
+  req.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+  req.onload = () => {
+    if (req.status >= 200 && req.status < 400) {
+      var request = JSON.parse(req.response)
+      newInfo.appendChild(newInvParcial(request.inventario))
+      // cargarGraficosChi(request.chicuadrado)
+    } else { console.error('Error en la conexion! Estado: ' + req.status) }
+  }
+
+req.send(JSON.stringify({
+  modulo: parseInt(formInvParcial.imputs[0].value),
+  cant: parseInt(formInvParcial.imputs[1].value),
+  a: parseInt(formInvParcial.imputs[2].value),
+  semillas: [parseInt(formInvParcial.imputs[3].value)],
+  x1: [2, 3, 4],
+  px1: [0.30, 0.40, 0.30],
+  x2: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+  px2: [0.135, 0.271, 0.271, 0.180, 0.090, 0.036, 0.012, 0.004, 0.001],
+  dic: [
+    { 'stock': parseInt(formInvParcial.imputs[4].value), 'pedido': arrPedido.map(x=>parseInt(x.value)) },
+    { 'pedido': parseInt(formInvParcial.imputs[6].value), 'stock': arrStock.map(x=>parseInt(x.value)) }
+  ]
+  })
+  )
+  window.scrollTo(0, document.getElementById('informe').getBoundingClientRect().y)
+})
+

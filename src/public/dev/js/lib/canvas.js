@@ -1,5 +1,6 @@
-function cargarGraficosChi(data){
-  each(data,(el,key)=>{
+// function cargarGraficosChi(data){
+//   each(data,(el,key)=>{
 
-  })
-}
+//   })
+// }
+
