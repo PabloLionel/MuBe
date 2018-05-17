@@ -54,7 +54,10 @@ def normal():
 #@crossdomain(origin='*')
 def respuestaInvParcial():
   try:
-    return json.dumps(result.respuestaInvParcial(int(req.json['modulo']),int(req.json['cant']),int(req.json['a']),req.json['semillas'],req.json['x1'],req.json['px1'],req.json['x2'],req.json['px2'],req.json['dic']))
+    print(int(req.json['modulo']),int(req.json['cant']),int(req.json['a']),req.json['semillas'],req.json['x1'],req.json['px1'],req.json['x2'],req.json['px2'],req.json['dic'])
+    salida = json.dumps(result.respuestaInvParcial(int(req.json['modulo']),int(req.json['cant']),int(req.json['a']),req.json['semillas'],req.json['x1'],req.json['px1'],req.json['x2'],req.json['px2'],req.json['dic']))
+    print(salida)
+    return salida
   except Exception() as e:
     return json.dumps({'errorServer': e})
 

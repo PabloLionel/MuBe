@@ -25,7 +25,7 @@ class Inventario:
     dicCorrida = [0] * corrida
 
     for h in range(corrida):
-      #inven = [0] * dias
+      inven = [0] * dias
       totalperdida = 0
       totalventa = 0
       venta = []
@@ -86,22 +86,27 @@ class Inventario:
             a = ' Hoy se pidio ' + str(repos) + ' unidades '
 
         #print(' ' + str(i+1) + '       ' + str(exiIni) + '        ' + str(demanda[i]) + '      ' + str(venta[i]) + '       ' + str(dins) + '       ' + str(existencias_fin) + '   '+ str(a + b))
-        # inven[i] = {
-        #   'dia': i + 1,
-        #   'existIni': exiIni,
-        #   'demanda': demanda[i],
-        #   'venta': venta[i],
-        #   'demInsat': dins,
-        #   'existFin': existencias_fin,
-        #   'operacion': a + b
-        # }
+        inven[i] = {
+          'dia': i + 1,
+          'existIni': exiIni,
+          'demanda': demanda[i],
+          'venta': venta[i],
+          'demInsat': dins,
+          'existFin': existencias_fin,
+          'operacion': a + b
+        }
         exiIni = existencias_fin
+        if totdins == 0:
+          totalperdidaTotdins = 0
+        else:
+          totalperdidaTotdins = totalperdida/totdins
 
       dicCorrida[h] = {
         'dias': dias,
+        'detalleCorrida': inven,
         'existIni': mostExist,
         'pedido': pedido,
-        'promedio': totalperdida/totdins,
+        'promedio': totalperdidaTotdins,
         'totPerdida': totalperdida,
         'totVenta': totalventa,
         'totDiaDemIns': totdins
@@ -122,17 +127,17 @@ class Inventario:
       'exp2': exp2
     }
 
-dias = 8#[0.001, 0.762, 0.807, 0.752, 0.124, 0.999, 0.647, 0.742]
-demanda = [50, 70, 58, 98, 12, 45, 74, 78]
-demora = [2, 4, 2, 3, 2, 4, 4, 2]
-stock = [200, 500, 300, 400]
-pedido = [200, 300]
-cantPedido = 5
+# dias = 8#[0.001, 0.762, 0.807, 0.752, 0.124, 0.999, 0.647, 0.742]
+# demanda = [50, 70, 58, 98, 12, 45, 74, 78]
+# demora = [2, 4, 2, 3, 2, 4, 4, 2]
+# stock = [200, 500, 300, 400]
+# pedido = [200, 300]
+# cantPedido = 5
 
-pepe = [
-  {'stock': 400, 'pedido': [550, 278, 196]},
-  {'pedido': 12, 'stock': [36, 45, 52]}
-]
+# pepe = [
+#   {'stock': 400, 'pedido': [550, 278, 196]},
+#   {'pedido': 12, 'stock': [36, 45, 52]}
+# ]
 
 # inv = Inventario()
 # print(inv.exp_inventario(dias, demanda, demora, pepe, cantPedido))

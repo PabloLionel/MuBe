@@ -1,15 +1,10 @@
 @mixin list-container(){
-  ul,
-  ol{
+  ul{
     @include reset-list();
   }
   .list{
     .item{
-      &__toggle{
-        position: absolute;
-        top: 5px;
-        right: 5px;
-      }
+      // &.toggle{cursor:pointer}
       &__title{
         padding: 15px 2px;
         font-size: 2em;
@@ -17,15 +12,16 @@
         margin-bottom: 0;
       }
       &__content{
-        z-index: 50;
-        max-height: 0;
-        overflow: hidden;
-        transition: all 500ms;
-        &.active{
-          max-height: 445px;
-        }
+        padding: 10px;
+        // z-index: 50;
+        // max-height: 0;
+        // overflow: hidden;
+        // transition: all 500ms;
+        // &.active{
+        //   max-height: none;
+        // }
       }
-      position: relative;
+      // position: relative;
       padding: 0;
       box-shadow: 0 2px 0 0 $bg-5;
       &:last-child{

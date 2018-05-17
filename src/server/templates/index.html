@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="stylesheet" href="{{url_for('static', filename='css/main.min.css')}}"/>
-    <!-- <link rel="icon" type="image/ico" href="{{url_for('static', filename='favicon.ico')}}"/> -->
   </head>
   <body>
     <div class="menu__content">
@@ -29,17 +28,17 @@
           <div class="MBForm">
             <div class="form vertical">
               <h2 class="title">Test Chi-Cuadrado</h2>
-              <form action="">
+              <form data-id="ranking">
                 <div class="subtitle">Experimento:</div>
                 <div class="section">
                   <label for="modulo">Modulo:</label>
-                  <input type="number" name="modulo" placeholder="Modulo" required="required"/>
+                  <input class="entrante" type="number" name="modulo" placeholder="Modulo" required="required"/>
                   <label for="cant">Cantidad:</label>
-                  <input type="number" name="cant" placeholder="Cantidad" required="required"/>
+                  <input class="entrante" type="number" name="cant" placeholder="Cantidad" required="required"/>
                   <label for="bandera">Bandera:</label>
-                  <input type="number" name="bandera" placeholder="Bandera" required="required"/>
+                  <input class="entrante" type="number" name="bandera" placeholder="Bandera" required="required"/>
                   <label>Error:</label>
-                  <select name="error" required="required">
+                  <select class="entrante" name="error" required="required">
                     <option value="0.01">0.01</option>
                     <option value="0.025">0.025</option>
                     <option value="0.05">0.05</option>
@@ -49,20 +48,20 @@
                 <div class="subtitle">Iteraciones:</div>
                 <div class="section">
                   <label for="semillas">Cantidad:</label>
-                  <input id="semillas" type="number" name="semillas" value="1" min="1" placeholder="Semillas"/>
+                  <input class="entrante" type="number" name="semillas" value="0" min="1" placeholder="Semillas"/>
                   <div id="nsemillas"></div>
-                </div><a class="button" id="calRanking" href="">calcular</a><a class="resetFormTablero button">Restablecer</a>
+                </div><a class="calcular button" href="#informe">Calcular</a><a class="reset button">Limpiar</a>
               </form>
             </div>
             <div class="preview">
               <h2 class="title">Vista Previa</h2>
               <div class="section">
                 <p>{</p>
-                <p> Modulo: <span id='obserMod'></span>,</p>
-                <p> Cantidad: <span id='obserCant'></span>,</p>
-                <p> Bandera: <span id='obserB'></span>,</p>
-                <p> Error: <span id='obserErr'></span>,</p>
-                <p> Semillas: <span id='obserSem'></span></p>
+                <p> Modulo: ,</p>
+                <p> Cantidad: ,</p>
+                <p> Bandera: ,</p>
+                <p> Error: ,</p>
+                <p> Semillas:</p>
                 <p>}</p>
               </div>
             </div>
@@ -75,13 +74,13 @@
       <section class="container">
         <div class="row">
           <div class="list-container">
-            <ol class="list">
+            <ul class="list">
               <li class="item">
                 <h2 class="item__title">Ruleta:</h2>
                 <div class="item__contend" id="ruleta">
                   <div class="MBForm">
                     <div class="form">
-                      <form>
+                      <form data-id="ruleta">
                         <div class="subtitle">Parametros de prueba:</div>
                         <div class="section">
                           <label for="modulo">Modulo:</label>
@@ -92,7 +91,7 @@
                           <input type="number" name="bandera" placeholder="Bandera" required="required"/>
                           <label for="semilla">Semilla:</label>
                           <input type="number" name="semilla" placeholder="semilla" required="required"/>
-                        </div><a class="button" id="calRuleta" href="">calcular</a><a class="button" id="resetFormTablero" href="">Restablecer</a>
+                        </div><a class="calcular button" href="">calcular</a><a class="reset button" href="">Limpiar</a>
                       </form>
                     </div>
                   </div><br/>
@@ -100,7 +99,7 @@
                     <table>
                       <thead>
                         <tr>
-                          <th>X</th>
+                          <th>(X)</th>
                           <th>0</th>
                           <th> 00</th>
                           <th>1</th>
@@ -231,11 +230,128 @@
                 </div>
               </li>
               <li class="item">
-                <h2 class="item__title">Inventario(Normal):</h2>
-                <div class="item__contend" id="invent">
+                <h2 class="item__title">Inventario(Parcial):</h2>
+                <div class="item__contend">
                   <div class="MBForm">
                     <div class="form">
-                      <form>
+                      <form data-id="inventarioParcial">
+                        <div class="subtitle">Parametros de la Serie a Generar:</div>
+                        <div class="section">
+                          <label for="modulo">Modulo:</label>
+                          <input class="entrante" type="number" name="modulo" placeholder="Modulo" required="required"/>
+                          <label for="cant">Cantidad:</label>
+                          <input class="entrante" type="number" name="cant" placeholder="Cantidad" required="required"/>
+                          <label class="entrante" for="bandera">Bandera:</label>
+                          <input class="entrante" type="number" name="bandera" placeholder="Bandera" required="required"/>
+                          <label for="semilla">Semilla:</label>
+                          <input class="entrante" type="number" name="semilla" placeholder="semilla" required="required"/>
+                        </div>
+                        <div class="subtitle">Parametros de Experimentos:</div>
+                        <div class="section">
+                          <div class="section">
+                            <p class="full">Experimento 1</p>
+                            <label for="stock">Stock a Analizar:</label>
+                            <input class="entrante" type="number" name="stock" placeholder="stock" required="required"/>
+                            <p class="full">corridas</p>
+                            <label for="pedidos">Cantidades de Puntos de Pedido:</label>
+                            <input class="entrante" type="number" name="pedidos" placeholder="Puntos de reposición" min="0" value="0" required="required"/>
+                            <div id="nPedidos"></div>
+                          </div>
+                          <div class="section">
+                            <p class="full">Experimento 2</p>
+                            <label for="pedido">Punto de Pedido a Analizar:</label>
+                            <input class="entrante" type="number" name="pedido" placeholder="Pedido" required="required"/>
+                            <p class="full">corridas</p>
+                            <label for="stocks">Cantidades de Stocks:</label>
+                            <input class="entrante" type="number" name="stocks" placeholder="Stocks" min="0" value="0" required="required"/>
+                            <div id="nStocks"></div>
+                          </div>
+                        </div><a class="calcular button" href="">calcular</a><a class="reset button" href="">limpiar</a>
+                      </form>
+                    </div>
+                  </div>
+                  <div class="tInvPar clearfix">
+                    <div class="table-basic-invPar">
+                      <table>
+                        <thead>
+                          <tr>
+                            <th>Nro. de Articulos Demandados</th>
+                            <th>Nro. de dias (frecuencia de las demandas)</th>
+                          </tr>
+                        </thead>
+                        <tbody class="sencillo">
+                          <tr>
+                            <td>1</td>
+                            <td>135</td>
+                          </tr>
+                          <tr>
+                            <td>2</td>
+                            <td>271</td>
+                          </tr>
+                          <tr>
+                            <td>3</td>
+                            <td>271</td>
+                          </tr>
+                          <tr>
+                            <td>4</td>
+                            <td>180</td>
+                          </tr>
+                          <tr>
+                            <td>5</td>
+                            <td>90</td>
+                          </tr>
+                          <tr>
+                            <td>6</td>
+                            <td>36</td>
+                          </tr>
+                          <tr>
+                            <td>7</td>
+                            <td>12</td>
+                          </tr>
+                          <tr>
+                            <td>8</td>
+                            <td>4</td>
+                          </tr>
+                          <tr>
+                            <td>9</td>
+                            <td>1</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="table-basic-invPar">
+                      <table>
+                        <thead>
+                          <tr>
+                            <th>Dias Transcurridos hasta la entrega de los equipos</th>
+                            <th>Nro. de veces</th>
+                          </tr>
+                        </thead>
+                        <tbody class="sencillo">
+                          <tr>
+                            <td>2</td>
+                            <td>30</td>
+                          </tr>
+                          <tr>
+                            <td>3</td>
+                            <td>40</td>
+                          </tr>
+                          <tr>
+                            <td>4</td>
+                            <td>30</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="item">
+                <h2 class="item__title">Inventario(Normal):</h2>
+                <div class="item__contend">
+                  <div class="MBForm">
+                    <div class="form">
+                      <form data-id="inventarioNormal">
                         <div class="subtitle">Parametros de la Serie a Generar:</div>
                         <div class="section">
                           <label for="modulo">Modulo:</label>
@@ -266,7 +382,7 @@
                             <input id="cantStock" type="number" name="stocks" placeholder="Stocks" min="1" value="1" required="required"/>
                             <div id="inputsStock"></div>
                           </div>
-                        </div><a class="button" id="calInventario" href="">calcular</a><a class="button" id="resetFormTablero" href="">Restablecer</a>
+                        </div><a class="calcular button" href="">calcular</a><a class="reset button" href="">limpiar</a>
                       </form>
                     </div>
                   </div>
@@ -275,10 +391,10 @@
               </li>
               <li class="item">
                 <h2 class="item__title">Inventario(Poison):</h2>
-                <div class="item__contend" id="invent">
+                <div class="item__contend">
                   <div class="MBForm">
                     <div class="form">
-                      <form>
+                      <form data-id="inventarioPoisson">
                         <div class="subtitle">Parametros de la Serie a Generar:</div>
                         <div class="section">
                           <label for="modulo">Modulo:</label>
@@ -310,7 +426,7 @@
                             <input id="cantStock" type="number" name="stocks" placeholder="Stocks" min="1" value="1" required="required"/>
                             <div id="inputsStock"></div>
                           </div>
-                        </div><a class="button" id="calInventario" href="">calcular</a><a class="button" id="resetFormTablero" href="">Restablecer</a>
+                        </div><a class="calcular button" href="">calcular</a><a class="reset button" href="">limpiar</a>
                       </form>
                     </div>
                   </div>
@@ -320,7 +436,7 @@
               <li class="item">
                 <h2 class="item__title">Metodo de los Indices:</h2>
               </li>
-            </ol>
+            </ul>
           </div>
         </div>
       </section>
@@ -329,7 +445,7 @@
       </div>
       <section class="container informes">
         <div class="row">
-          <div id="newRanking"></div>
+          <div id="newInfo"></div>
         </div>
       </section>
       <div class="secciones">

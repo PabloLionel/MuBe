@@ -1,7 +1,7 @@
-#invent.item__contend
+.item__contend
   .MBForm
     .form
-      form
+      form(data-id='inventarioPoisson')
         .subtitle Parametros de la Serie a Generar:
         .section
           label(for='modulo') Modulo:
@@ -30,6 +30,6 @@
             label(for='stocks') Cantidades de Stocks:
             input#cantStock(type='number', name='stocks', placeholder='Stocks', min="1",value="1", required)
             #inputsStock
-        a#calInventario(href='', class='button') calcular
-        a#resetFormTablero(href='', class='button') Restablecer
+        a.calcular(href='', class='button') calcular
+        a.reset(href='', class='button') limpiar
   #experimentos
