@@ -4,26 +4,25 @@ function colorAut() {
 
 function opcion(tituloX, tituloY) {
   return {
-    responsive: false,
     scales: {
       xAxes: [{
         scaleLabel: {
           display: true,
           labelString: tituloX,
           fontColor: "#0A1842",
-          fontSize: 16,
-          fontStyle: 'bold'
-        }
-      }],
-      yAxes: [{
-        scaleLabel: {
-          display: true,
-          labelString: tituloY,
-          fontColor: "#0A1842",
-          fontSize: 16,
+          fontSize: 22,
           fontStyle: 'bold'
         }
       }]
+      // yAxes: [{
+      //   scaleLabel: {
+      //     display: true,
+      //     labelString: tituloY,
+      //     fontColor: "#0A1842",
+      //     fontSize: 16,
+      //     fontStyle: 'bold'
+      //   }
+      // }]
     }
   };
 }
@@ -172,3 +171,4 @@ function pepe(exps, numEx){
     options: opcion("Corridas", "Ventas y Perdidas")
   })
 }
+

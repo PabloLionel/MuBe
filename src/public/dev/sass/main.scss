@@ -54,7 +54,6 @@ main{
 @import "lib/table";
 .#{$table-name}{
   @include table(
-    1063px, // brack Point del borde
     ((70px+10*2)*6),
     10px,
     30px,// ancho de la columnas (ancho = )
@@ -65,12 +64,11 @@ main{
 }
 .#{$table-name}-invPar{
   @include table(
-    1063px, // brack Point del borde
     ((70px+10*2)*6),
     10px,
     241px,// ancho de la columnas (ancho = )
     20px,
-    lighten($bg-5,23),// darken($bg-4,10),
+    lighten($bg-5,23),
     #000,
     30);
   table{
@@ -82,6 +80,20 @@ main{
   >*{
     margin-top: 10px;
     @include from(l){@include toLeft(50%,0);}
+  }
+}
+.table-info{
+  @include table(
+    ((128px+10*2)*7),
+    10px,
+    45px,// ancho de la columnas (ancho = )
+    20px,
+    lighten($bg-5,23),
+    #000,
+    30){
+    table{
+      @include m-auto();
+    }
   }
 }
 @import "lib/list";

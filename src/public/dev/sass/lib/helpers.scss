@@ -26,3 +26,11 @@
   text-align: center;
   text-transform: capitalize;
 }
+.tx-center{text-align: center}
+.tx-upper{text-transform: uppercase}
+.tx-Jumbo{
+  font-size: 41px;
+  @include from(m){font-size: 47px;}
+  @include from(l){font-size: 51px;}
+  @include from(xl){font-size: 58px;}
+}

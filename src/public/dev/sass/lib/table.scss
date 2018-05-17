@@ -1,7 +1,7 @@
-@mixin table($bp-border,$min-w,$p,$col-w-first,$height-line,$bg,$color,$harmony){
+// @mixin$bp-border,
+@mixin table($min-w,$p,$col-w-first,$height-line,$bg,$color,$harmony){
   width: 100%;
   overflow-x: auto;
-  overflow-y: hidden;
   table{
     min-width:$min-w;
     border-collapse: collapse;

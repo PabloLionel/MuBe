@@ -9,9 +9,7 @@ var forms = Array.prototype.slice.apply(document.getElementsByTagName('form')).m
     reset: Array.prototype.slice.apply(x.children).filter(x => x.classList.contains('reset'))[0]
   })
 )
-console.log(forms)
 each(forms, el => {
-  console.log(el.reset)
   el.reset.addEventListener('click', e => {
     e.preventDefault();
     e.target.parentElement.reset();
@@ -62,7 +60,7 @@ formRanking.calcular.addEventListener('click', e => {
     if (req.status >= 200 && req.status < 400) {
       var request = JSON.parse(req.response)
       newInfo.appendChild(newRanking(request.chicuadrado))
-      // cargarGraficosChi(request.chicuadrado)
+      cargarGraficosChi(request.chicuadrado)
     } else { console.error('Error en la conexion! estado: ' + req.status) }
   }
   req.send(JSON.stringify({
@@ -75,7 +73,7 @@ formRanking.calcular.addEventListener('click', e => {
   )
   window.scrollTo(0, document.getElementById('informe').getBoundingClientRect().y)
 })
-newInfo.appendChild(newRanking(resultadoRancking.chicuadrado))
+// newInfo.appendChild(newRanking(resultadoRancking.chicuadrado))
 
 //[[[[[[[[[[[[[[[[[[[[[[[[Formulario para inventarioParcial]]]]]]]]]]]]]]]]]]]]]]]]
 var formInvParcial = getForm('inventarioParcial')
@@ -129,7 +127,7 @@ formInvParcial.calcular.addEventListener('click', e => {
     if (req.status >= 200 && req.status < 400) {
       var request = JSON.parse(req.response)
       newInfo.appendChild(newInvParcial(request.inventario))
-      // cargarGraficosChi(request.chicuadrado)
+      cargarGraficosInvPar(request.inventario)
     } else { console.error('Error en la conexion! Estado: ' + req.status) }
   }
 
