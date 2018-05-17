@@ -42,7 +42,7 @@ class Inventario:
 
       #print('Dia  existInicial  demanda  venta  demInsatis  existFin')
       for i in range(dias):
-        b = ''
+        b = '-'
         # si coincide con el dia de reposicion, se repone
         if diarep == i:
           if i > 0:
@@ -62,7 +62,7 @@ class Inventario:
           dins = 0 # pudo vender lo demandado por lo tanto la demanda insatisfecha es cero
 
         totalventa = totalventa + venta[i] # acumula las ventas hechas
-        a = ''
+        a = '-'
         existencias_fin = exiIni - venta[i] # se actualiza la existencia final
 
         # solo se va a realizar el pedido si ya se repuso lo pedido anteriormente
@@ -101,7 +101,7 @@ class Inventario:
         'dias': dias,
         'existIni': mostExist,
         'pedido': pedido,
-        'promedio': totalperdida/dias,
+        'promedio': totalperdida/totdins,
         'totPerdida': totalperdida,
         'totVenta': totalventa,
         'totDiaDemIns': totdins
