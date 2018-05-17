@@ -28,7 +28,7 @@ function opcion(tituloX, tituloY) {
 }
 
 function cargarGraficosChi(data) {
-  var figFinal = document.getElementById("grafico-final");
+  var figFinal = document.getElementById("grafico");
   var barChart
   var lineChart
   var daSet = []
