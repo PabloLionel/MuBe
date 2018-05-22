@@ -50,7 +50,7 @@ function cargarGraficosChi(data) {
     datos = {
       labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
       datasets: [{
-        label: "Frecuencias",
+        label: "Frecuencia Observada",
         data: el.frecuencia,
         borderColor: 'rgba(' + col + ', 1)',
         borderWidth: 1.5,
