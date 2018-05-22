@@ -61,6 +61,9 @@ formRanking.calcular.addEventListener('click', e => {
       var request = JSON.parse(req.response)
       newInfo.appendChild(newRanking(request.chicuadrado))
       cargarGraficosChi(request.chicuadrado)
+      on(document.getElementById('ranking-container'),'click','list-toggle', e=>{
+        e.target.nextSibling.classList.toggle('active')
+      })
     } else { console.error('Error en la conexion! estado: ' + req.status) }
   }
   req.send(JSON.stringify({
@@ -74,6 +77,9 @@ formRanking.calcular.addEventListener('click', e => {
   window.scrollTo(0, document.getElementById('informe').getBoundingClientRect().y)
 })
 // newInfo.appendChild(newRanking(resultadoRancking.chicuadrado))
+// on(document.getElementById('ranking-container'),'click','item-toggle', e=>{
+//   e.target.nextSibling.classList.toggle('active')
+// })
 
 //[[[[[[[[[[[[[[[[[[[[[[[[Formulario para inventarioParcial]]]]]]]]]]]]]]]]]]]]]]]]
 var formInvParcial = getForm('inventarioParcial')
@@ -128,6 +134,9 @@ formInvParcial.calcular.addEventListener('click', e => {
       var request = JSON.parse(req.response)
       newInfo.appendChild(newInvParcial(request.inventario))
       cargarGraficosInvPar(request.inventario)
+      on(document.getElementById('ranking-container'),'click','list-toggle', e=>{
+        e.target.classList.toggle('active')
+      })
     } else { console.error('Error en la conexion! Estado: ' + req.status) }
   }
 

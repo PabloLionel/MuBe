@@ -4,6 +4,7 @@ function newRanking(data) {
     let decimales = 10000;//5decimales
     return newComponentHTML({
       el: 'div',
+      attrs: [{name: 'id', val: 'ranking-container'}],
       child: [{
         el: 'h1',
         attrs: [{ name: 'class', val: 'tx-center tx-upper tx-Jumbo' }],
@@ -19,14 +20,14 @@ function newRanking(data) {
             attrs: [{ name: 'class', val: 'item' }],
             child: [{
               el: 'p',
-              attrs: [{ name: 'class', val: '' }],
+              attrs: [{ name: 'class', val: 'item-toggle' }],
               text: 'Semilla utilizada: ' + el.semilla + ' , Chi-Cuadrado estimado: ' + el.valorChi + ' y fue ' + (el.aceptacion ? 'aceptado' : 'rechazado')
             }, {
               el: 'div',
               attrs: [{ name: 'class', val: 'item__content' }],
               child: [{
                 el: 'div',
-                attrs: [{ name: 'class', val: 'table-basic' }],
+                attrs: [{ name: 'class', val: 'table' }],
                 child: [{
                   el: 'table',
                   child: [{
@@ -142,7 +143,7 @@ function newRanking(data) {
             text: 'Grafico General de Experimentos'
           }, {
             el: 'canvas',
-            attrs: [{ name: 'id', val: 'grafico' }]
+            attrs: [{ name: 'id', val: 'grafico-final' }]
           }]
         }]
       }]

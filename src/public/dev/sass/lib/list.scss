@@ -4,7 +4,7 @@
   }
   .list{
     .item{
-      // &.toggle{cursor:pointer}
+      .item-toggle{cursor:pointer}
       &__title{
         padding: 15px 2px;
         font-size: 2em;
@@ -12,14 +12,13 @@
         margin-bottom: 0;
       }
       &__content{
-        padding: 10px;
-        // z-index: 50;
-        // max-height: 0;
-        // overflow: hidden;
-        // transition: all 500ms;
-        // &.active{
-        //   max-height: none;
-        // }
+        z-index: 50;
+        height: 0;
+        overflow: hidden;
+        transition: all 1s;
+        &.active{
+          height: auto;
+        }
       }
       // position: relative;
       padding: 0;
