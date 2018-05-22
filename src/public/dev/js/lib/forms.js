@@ -60,7 +60,7 @@ formRanking.calcular.addEventListener('click', e => {
     if (req.status >= 200 && req.status < 400) {
       var request = JSON.parse(req.response)
       newInfo.appendChild(newRanking(request.chicuadrado))
-      cargarGraficosChi(request.chicuadrado)
+      cargarGraficosChi(request.chicuadrado, optionsRanking.filter(op => op.selected)[0].innerHTML)
       on(document.getElementById('ranking-container'),'click','list-toggle', e=>{
         e.target.nextSibling.classList.toggle('active')
       })

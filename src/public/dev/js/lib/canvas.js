@@ -27,29 +27,53 @@ function opcion(tituloX, tituloY) {
   };
 }
 
-function cargarGraficosChi(data) {
-  var figFinal = document.getElementById("grafico");
+function cargarGraficosChi(data, error) {
+  var tabla = {
+    '0.01': 21.6660,
+    '0.025': 19.0228,
+    '0.05': 16.9190,
+    '0.1': 14.6837
+  }
+  var vaChi = tabla[error]
+  var figFinal = document.getElementById("grafico-final");
   var barChart
   var lineChart
   var daSet = []
   var datos
-  var col
+  var col, col2
   var fig
+  var npi
+  var sem = []
+  var chi = []
+  var chiError = []
 
   each(data, (el, key) => {
     fig = document.getElementById("grafico-" + key);
     col = colorAut()
-    daSet.push({
-      label: "Valor de Chi" + (key + 1),
-      data: el.frecuencia.map(x => (((x - el.valornpi) ** 2) / el.valornpi)),
-      borderColor: 'rgba(' + col + ', 1)',
-      borderWidth: 1.5,
-      backgroundColor: 'rgba(' + col + ', 0.2)',
-      hoverBackgroundColor: 'rgba(' + col + ', 0.5)'
-    })
+    col2 = colorAut()
+    npi = el.valornpi
+    sem.push(el.semilla)
+    chi.push(el.valorChi)
+    chiError.push(vaChi)
+
+    // daSet.push({
+    //   label: "Valor de Chi" + (key + 1),
+    //   data: el.frecuencia.map(x => (((x - el.valornpi) ** 2) / el.valornpi)),
+    //   borderColor: 'rgba(' + col + ', 1)',
+    //   borderWidth: 1.5,
+    //   backgroundColor: 'rgba(' + col + ', 0.2)',
+    //   hoverBackgroundColor: 'rgba(' + col + ', 0.5)'
+    // })
     datos = {
       labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
       datasets: [{
+        label: "Frecuencia Esperada",
+        data: [npi, npi, npi, npi, npi, npi, npi, npi, npi, npi],
+        borderColor: 'rgba(' + col2 + ', 1)',
+        borderWidth: 1.5,
+        backgroundColor: 'rgba(' + col2 + ', 0.2)',
+        hoverBackgroundColor: 'rgba(' + col2 + ', 0.5)'
+      },{
         label: "Frecuencia Observada",
         data: el.frecuencia,
         borderColor: 'rgba(' + col + ', 1)',
@@ -60,7 +84,7 @@ function cargarGraficosChi(data) {
     }
 
     barChart = new Chart(fig, {
-      type: 'bar',
+      type: 'line',
       data: datos,
       options: opcion("Dígitos", "Frecuencia de dígitos")
     });
@@ -69,10 +93,24 @@ function cargarGraficosChi(data) {
   lineChart = new Chart(figFinal, {
     type: 'line',
     data: {
-      labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
-      datasets: daSet
+      labels: sem,
+      datasets: [{
+        label: "Valor de Chi",
+        data: chi,
+        borderColor: 'rgba(' + col2 + ', 1)',
+        borderWidth: 1.5,
+        backgroundColor: 'rgba(' + col2 + ', 0.2)',
+        hoverBackgroundColor: 'rgba(' + col2 + ', 0.5)'
+      }, {
+        label: "Valor de Error",
+        data: chiError,
+        borderColor: 'rgba(' + col + ', 1)',
+        borderWidth: 1.5,
+        backgroundColor: 'rgba(' + col + ', 0.2)',
+        hoverBackgroundColor: 'rgba(' + col + ', 0.5)'
+      }]
     },
-    options: opcion("Dígitos", "Valores de Chi")
+    options: opcion("Semilla", "Valores de Chi")
   })
 }
 
