@@ -1,5 +1,47 @@
-// @mixin$bp-border,
 @mixin table($min-w,$p,$col-w-first,$height-line,$bg,$color,$harmony){
+  width: 100%;
+  overflow-x: auto;
+  table{
+    min-width:$min-w;
+    border-collapse: collapse;
+    background: #fff;
+    border:1px solid $bg;
+    border-left:0;
+    th,
+    td{
+      padding:$p;
+      line-height: $height-line;
+      text-align: center;
+    }
+    thead{
+      th{color: #fff}
+      tr{
+        th{
+          background-color: $bg;
+          &:first-child{width: $col-w-first+($p*2);}
+        }
+      }
+    }
+    tbody{
+      tr{
+        &:hover{
+          background-color: lighten($bg,$harmony);
+          td:first-child{background-color: $bg;}
+        }
+      }
+      td{
+        &:nth-child(even){background-color: lighten($bg,$harmony);}
+        &:first-child{
+          width: $col-w-first+($p*2);
+          background-color: #fff;
+          border-left:1px solid $bg
+        }
+      }
+    }
+  }
+  @content
+}
+@mixin table-fixed($min-w,$p,$col-w-first,$height-line,$bg,$color,$harmony){
   width: 100%;
   overflow-x: auto;
   table{
@@ -41,23 +83,6 @@
           width: $col-w-first+($p*2);
           background-color: #fff;
           border-left:1px solid $bg
-        }
-      }
-    }
-    tbody.sencillo{
-      tr{
-        &:hover{
-          background-color: lighten($bg,$harmony);
-          td:first-child{background-color: $bg;}
-        }
-        &:first-child{
-          td:first-child{box-shadow: 0 0 0 0 $bg;}
-        }
-      }
-      td{
-        &:nth-child(even){background-color: lighten($bg,$harmony);}
-        &:first-child{
-          background-color: #fff;
         }
       }
     }

@@ -53,10 +53,10 @@ main{
 }
 @import "lib/table";
 .#{$table-name}{
-  @include table(
+  @include table-fixed(
     ((70px+10*2)*6),
     10px,
-    30px,// ancho de la columnas (ancho = )
+    70px,// ancho de la columnas (ancho = )
     20px,
     lighten($bg-5,23),// darken($bg-4,10),
     #000,
@@ -83,7 +83,7 @@ main{
   }
 }
 .table-info{
-  @include table(
+  @include table-fixed(
     ((128px+10*2)*7),
     10px,
     45px,// ancho de la columnas (ancho = )
@@ -95,6 +95,16 @@ main{
       @include m-auto();
     }
   }
+}
+.table{
+  @include table(
+    ((70px+10*2)*6),
+    10px,
+    70px,// ancho de la columnas (ancho = )
+    20px,
+    lighten($bg-5,23),// darken($bg-4,10),
+    #000,
+    30)
 }
 @import "lib/list";
 .list-container{
