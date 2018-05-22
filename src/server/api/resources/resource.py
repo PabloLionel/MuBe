@@ -61,9 +61,10 @@ class Resultado:
     semilla = todas_series['semilla']
     arreglos = todas_series['series']
     arreglos0y1 = todas_series['series0y1']
+    frecObs = todas_series['frecObs']
 
     return {
-      'chicuadrado': test.ranking(semilla, arreglos, arreglos0y1, error)
+      'chicuadrado': test.ranking(semilla, arreglos, arreglos0y1, frecObs, error)
     }
 
   def respuestaIndice(self, modulo, cant, a, semilla, error):

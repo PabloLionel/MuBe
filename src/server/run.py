@@ -13,7 +13,7 @@ def index():
 #@crossdomain(origin='*')
 def testChi():
   try:
-    print(req.json)
+    #print(req.json)
     # print(req.data)
     return json.dumps(result.respuestaChicuadrado(int(req.json['modulo']),int(req.json['cant']),int(req.json['a']),req.json['semillas'],float(req.json['error'])))
   except Exception() as e:

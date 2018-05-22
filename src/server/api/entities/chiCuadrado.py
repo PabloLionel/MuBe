@@ -6,49 +6,49 @@ class TestChi:
   def __init__(self):
     pass
 
-  def cantDigitos(self, semillas, series, series0y1, error):
+  def cantDigitos(self, semillas, series, series0y1, fO, error):
     """ Recibe todas las series generadas y devuelve un valor para
     cada serie para saber si la serie generada es fiable o no. """
-    repe = len(semillas)
+    repe = len(fO)
     final=[0] * repe# se inicializa el arreglo que va a contener todos los datos a presentar
 
     # 1er for recorre las distintas series
     for k in range(repe):#len(series)):
-      posicion = [0] * 10 # se inicializa, va contener la cantidad de digitos que hay por numero
-      digitos = [] # se inicializa, se va guardar la descomposicion de las distintas series
+      #posicion = [0] * 10 # se inicializa, va contener la cantidad de digitos que hay por numero
+      #digitos = [] # se inicializa, se va guardar la descomposicion de las distintas series
 
       # 2do for recorre los elementos de un serie
-      for i in range(len(series[k])):
-        num = str(series[k][i]) # se guarda en "num" un numero de la serie
+      #for i in range(len(series[k])):
+        #num = str(series[k][i]) # se guarda en "num" un numero de la serie
 
         # 3er for recorre cada caracter de un numero
-        for j in range(len(num)):
-          x = int(num[j]) # se tranforma ese caracter a int, va contener un num entre 0 y9
-          posicion[x] = posicion[x] + 1 # se acumula la frecuencia de cada digito en la posicion correspondiente
-          digitos.append(x) # se guarda el digito en el arreglo
+        #for j in range(len(num)):
+          #x = int(num[j]) # se tranforma ese caracter a int, va contener un num entre 0 y9
+          #posicion[x] = posicion[x] + 1 # se acumula la frecuencia de cada digito en la posicion correspondiente
+          #digitos.append(x) # se guarda el digito en el arreglo
 
       # se calcula npi que es la cantidad total de digitos dividido la frecuencia de cada digito
-      npi = len(digitos) / len(posicion)
+      npi = len(series0y1[k]) / len(fO[k])
 
       # llamada al metodo que devuelve un valor de chi para esa frecuencia
-      vchi = self.testChiCuadrado(posicion, npi, error)
+      vchi = self.testChiCuadrado(fO[k], npi, error)
 
       # se arma un diccionario con todo los datos necesarios para armar un tabla para mostrar
       final[k] = {
         'semilla': semillas[k],
         'serie': series[k],
         'serie0y1': series0y1[k],
-        'frecuencia': posicion,
+        'frecuencia': fO[k],
         'valornpi': npi,
         'valorChi': vchi[0],
         'aceptacion': vchi[1]
       }
     return final
 
-  def ranking(self, semillas, series, series0y1, error):
+  def ranking(self, semillas, series, series0y1, fO, error):
     """ Recibe los arreglos de semillas, series, series0y1; la cantidad de repeticiones y el error
       devuelve devuelve en todo eso y mas en forma ordenada por el valor de chi"""
-    dic = self.cantDigitos(semillas, series, series0y1, error)
+    dic = self.cantDigitos(semillas, series, series0y1, fO, error)
     long = len(dic)
     chi = [0] * long # va a contener todos los valores de chi
     chicuadrado = [0] * long # va acontener todo un diccionario ordenado por el valor de chi
@@ -94,4 +94,5 @@ class TestChi:
     return acum, correcto
 
 # test = TestChi()
-# print(test.cantDigitos([214, 235, 124], [[125, 365, 854], [854, 412, 85], [125, 965, 412]], [[0.125, 0.365, 0.854], [0.854, 0.412, 0.085], [0.125, 0.965, 0.412]], 0.01))
+# print(test.cantDigitos([29, 31, 59], [[487403, 1749331280, 1959695530], [521017, 166798131, 910028382], [991613, 1633654162, 1247073839]], [[0.00022696470852334272, 0.8145958561518211, 0.9125543436559636], [0.00024261744704219394, 0.07767143243815351, 0.42376498804603], [0.00046175578630611104, 0.7607295004468083, 0.5807140095069604]], [[1, 0, 0, 0, 0, 0, 0, 0, 1, 1], [2, 0, 0, 0, 1, 0, 0, 0, 0, 0], [1, 0, 0, 0, 0, 1, 0, 1, 0, 0]],0.01))
+#print(test.metCongMulti(149, 10))
