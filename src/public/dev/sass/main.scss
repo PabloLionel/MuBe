@@ -106,6 +106,16 @@ main{
     #000,
     30)
 }
+.table-exp{
+  @include table(
+    ((170px+10*2)*6),
+    10px,
+    170px,// ancho de la columnas (ancho = )
+    20px,
+    lighten($bg-5,23),// darken($bg-4,10),
+    #000,
+    30)
+}
 @import "lib/list";
 .list-container{
   @include list-container;

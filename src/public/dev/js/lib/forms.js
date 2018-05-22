@@ -22,7 +22,6 @@ var nsem = document.getElementById('nsemillas')
 var optionsRanking = Array.prototype.slice.apply(formRanking.imputs[3].children)
 var semillas = []
 on(formRanking.form, 'keyup', 'entrante', e => ranking(e))
-// on(formRanking.form,'click','entrante',e=>ranking(e))
 function ranking(e) {
   switch (formRanking.imputs.indexOf(e.target)) {
     case 0://Modulo
