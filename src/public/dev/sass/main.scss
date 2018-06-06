@@ -106,6 +106,16 @@ main{
     #000,
     30)
 }
+.table-exp{
+  @include table(
+    ((170px+10*2)*6),
+    10px,
+    170px,// ancho de la columnas (ancho = )
+    20px,
+    lighten($bg-5,23),// darken($bg-4,10),
+    #000,
+    30)
+}
 @import "lib/list";
 .list-container{
   @include list-container;
@@ -115,9 +125,11 @@ main{
   @include tab(
     tab__head,//nombre de la clase donde estan los botones
     tab__item,//nombre de la clase donde estan los contenidos
-    lighten($bg-2,10),//backgroun del
+    lighten($negroMate,10),//backgroun del
     #fff,
-    lighten($bg-2,5),
+    lighten($negroMate,5),
     #ccc
     )
-}
+  }
+@import "lib/modal";
+@include modal(65%, 10px);

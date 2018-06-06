@@ -1,1 +1,36 @@
 #newInfo
+  h1 Teoria de Colas Resultado
+  .tab.m-auto
+    .tab__head
+      button Caso 1
+      button Caso 2
+      button Caso 3
+    .tab__item
+      h3 Corridas del experimento 1
+      .table-basic
+        table
+          thead
+            tr
+              each x in ['', 'Media TC', 'a','b']
+                th= x
+          tbody.sencillo
+            each val, index in [135, 271, 271, 180, 90, 36, 12, 4, 1]
+              tr
+                td= index+1
+                td= val
+    .tab__item
+      h3 Corridas:
+      .table
+        table
+          thead
+            tr
+              each x in ['dias', 'Nro.', 'a','b']
+                th= x
+          tbody.sencillo
+            each val, index in [30, 40, 30]
+              tr
+                td= index+2
+                td= val
+    .tab__item
+      h3 Caso 3
+      p Cualquier yerba de contenido...
