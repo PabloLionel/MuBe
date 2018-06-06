@@ -47,9 +47,24 @@
           border: 0;
           border-bottom: 1px solid $tx-5;
         }
+        .subtitle{
+          font-size: 19px;
+          padding-bottom: 0;
+          margin-bottom: 0;
+        }
         .section{
           padding: $pad * 1.3;
+          padding-right: 0;
           border: 1px solid darken($bg-seg, 20);
+          margin-bottom: $pad;
+          border-radius: $b-radius;
+          overflow: hidden;
+        }
+        .inline{
+          * {
+            display: inline-block;
+            width: 50px;
+          }
         }
       }
     }
