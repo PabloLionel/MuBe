@@ -70,6 +70,13 @@ def respuestaInvPoisson():
   except Exception() as e:
     return json.dumps({'errorServer': e})
 
+@app.route("/tColas", methods=['POST'])
+@crossdomain(origin='*')
+def respuestaTeoriaDeColas():
+  try:
+    return json.dumps(result.respuestaTeoriaDeColas(int(req.json['modulo']),int(req.json['n']),int(req.json['a']),req.json['semilla'],req.json['cantExp'],req.json['cantCor'],req.json['L'],req.json['M'],req.json['opLM']))
+  except Exception() as e:
+    return json.dumps({'errorServer': e})
 
 @app.route("/test", methods=['POST'])
 @crossdomain(origin='*')
@@ -80,7 +87,7 @@ def test():
     return json.dumps({'test': 0, 'err': e})
 
 if __name__ == "__main__":
-    app.run(debug=True, port=5555, host='0.0.0.0')
+    app.run(debug=True, port=4444, host='0.0.0.0')
 
 
 # var req = new XMLHttpRequest()

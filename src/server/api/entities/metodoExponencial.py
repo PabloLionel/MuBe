@@ -24,4 +24,4 @@ class Exponencial:
     return x, fx, Fx
 
 # exp = Exponencial()
-# print(exp.met_exponencial([0.005, 2, 3, 4, 5, 6, 7, 8], 9))
+# print(exp.met_exponencial([0.45813352656666884, 0.2637164987146979, 0.7005057432366144, 0.000000002], .23))

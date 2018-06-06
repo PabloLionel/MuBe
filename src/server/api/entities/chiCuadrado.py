@@ -6,7 +6,7 @@ class TestChi:
   def __init__(self):
     pass
 
-  def cantDigitos(self, semillas, series, series0y1, fO, error):
+  def cantDigitos(self, semillas, series, series0y1, fO, cantDig, error):
     """ Recibe todas las series generadas y devuelve un valor para
     cada serie para saber si la serie generada es fiable o no. """
     repe = len(fO)
@@ -28,7 +28,7 @@ class TestChi:
           #digitos.append(x) # se guarda el digito en el arreglo
 
       # se calcula npi que es la cantidad total de digitos dividido la frecuencia de cada digito
-      npi = len(series0y1[k]) / len(fO[k])
+      npi = cantDig[k] / len(fO[k])
 
       # llamada al metodo que devuelve un valor de chi para esa frecuencia
       vchi = self.testChiCuadrado(fO[k], npi, error)
@@ -45,10 +45,10 @@ class TestChi:
       }
     return final
 
-  def ranking(self, semillas, series, series0y1, fO, error):
+  def ranking(self, semillas, series, series0y1, fO, cantDig ,error):
     """ Recibe los arreglos de semillas, series, series0y1; la cantidad de repeticiones y el error
       devuelve devuelve en todo eso y mas en forma ordenada por el valor de chi"""
-    dic = self.cantDigitos(semillas, series, series0y1, fO, error)
+    dic = self.cantDigitos(semillas, series, series0y1, fO, cantDig, error)
     long = len(dic)
     chi = [0] * long # va a contener todos los valores de chi
     chicuadrado = [0] * long # va acontener todo un diccionario ordenado por el valor de chi
