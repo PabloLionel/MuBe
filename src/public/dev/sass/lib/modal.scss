@@ -1,14 +1,15 @@
 @mixin modal($w, $pad, $name: modal-content){
   .#{$name}{
-    position: absolute;
+    position: fixed;
     top: 0;
+    left: 0;
     width: 100%;
     height: 100vh;
     background-color: rgba(0,0,0,.55);
     .modal{
       $padding: $pad;
       position: relative;
-      top: 100px;
+      top: 50px;
       width: $w;
       margin-left: auto;
       margin-right: auto;
@@ -17,6 +18,8 @@
       box-shadow: 0 4px 15px 0 #000;
       &-head{ padding: $padding; }
       &-body{
+        max-height: 65vh;
+        overflow-y: scroll;
         $bordes: 1px;
         $bordes-color: lighten(#000, 70);
         padding: $padding;

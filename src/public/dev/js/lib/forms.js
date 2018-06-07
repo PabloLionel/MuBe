@@ -207,13 +207,13 @@ formTeoriaDeColas.calcular.addEventListener('click', e => {
     modulo: parseInt(formTeoriaDeColas.inputs[0].value),
     cant: parseInt(formTeoriaDeColas.inputs[1].value),
     a: parseInt(formTeoriaDeColas.inputs[2].value),
-    semillas: [parseInt(formTeoriaDeColas.inputs[3].value)],
-    exp: parent(Experimentos.inputs[5]),
-    inc: parseFloat(formTeoriaDeColas.inputs[6].value),
-    corridas: parseInt(formTeoriaDeColas.inputs[7].value),
-    opcML: formTeoriaDeColas.inputs[8].checked,
-    iniM: parseInt(formTeoriaDeColas.inputs[10].value),
-    iniL: parseInt(formTeoriaDeColas.inputs[11].value)
+    semillas: parseInt(formTeoriaDeColas.inputs[3].value),
+    exp: parseInt(formTeoriaDeColas.inputs[4].value),
+    inc: parseFloat(formTeoriaDeColas.inputs[5].value),
+    corridas: parseInt(formTeoriaDeColas.inputs[6].value),
+    opcML: formTeoriaDeColas.inputs[7].checked,
+    iniM: parseFloat(formTeoriaDeColas.inputs[9].value),
+    iniL: parseFloat(formTeoriaDeColas.inputs[10].value)
     })
     )
     window.scrollTo(0, document.getElementById('informe').getBoundingClientRect().y)

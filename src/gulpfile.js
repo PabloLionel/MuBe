@@ -87,6 +87,28 @@ gulp.task('js', () => {
     // .pipe(gulp.dest(DEST_PROD + 'js/'))
 })
 
+gulp.task('prod', ()=>{
+  gulp.src([SRC + 'sass/*.scss', SRC + 'sass/*.sass'])
+    .pipe(plumber(plumberOptions))
+    .pipe(sass())
+    .pipe(autoprefixer(autoprefixerOptions))
+    .pipe(csscomb('.csscomb.json'))
+    .pipe(cssnano())
+    .pipe(rename('main.min.css'))
+    .pipe(gulp.dest('server/static/css/'))
+  gulp.src(SRC + 'view/*.pug')
+    .pipe(plumber(plumberOptions))
+    .pipe(pug({
+      pretty:false/*para que el resultado no este comprimido*/
+    }))
+    .pipe(rename('index.html'))
+    .pipe(gulp.dest('server/templates/'))
+  gulp.src([SRC + 'js/lib/_helpers.js',SRC + 'js/**/*.js'])
+    .pipe(plumber(plumberOptions))
+    .pipe(concat('all.js'))
+    .pipe(gulp.dest('server/static/js/'))
+})
+
 gulp.task('default', ['pug','sass','js'], ()=>{
 
   browserSync.init(require('./bs-config.js'));
