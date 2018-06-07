@@ -21,7 +21,7 @@
           label(for='experimentos') Nro. de Experimentos:
           input.entrante(type='number', name='experimentos', placeholder='experimentos', required)
           label(for='incremento') Incremento Entre Experimento:
-          input.entrante(type='number', name='incremento', placeholder='Incremento', required)
+          input.entrante(name='incremento', placeholder='Incremento', required)
           label(for='corridas') Nro. de corridas:
           input.entrante(type='number', name='corridas', placeholder='corridas', required)
           .subtitle Parametro a variar:
@@ -32,9 +32,9 @@
               input.entrante.s-10(type='radio', name='flag', required)
           .section
             span.subtitle Valores iniciales
-            input.entrante(type='number', placeholder='M', required)
+            input.entrante(placeholder='M', required)
             br
-            input.entrante(type='number', placeholder='L', required)
+            input.entrante(placeholder='L', required)
         a.calcular(href='', class='button') calcular
         a.reset(href='', class='button') limpiar
 
