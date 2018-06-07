@@ -1,6 +1,7 @@
 from flask import Flask, render_template as ren, request as req, json
 from api.resources.resource import Resultado
 from api.config.cors import crossdomain
+
 app = Flask(__name__)
 result = Resultado()
 
@@ -74,7 +75,7 @@ def respuestaInvPoisson():
 @crossdomain(origin='*')
 def respuestaTeoriaDeColas():
   try:
-    return json.dumps(result.respuestaTeoriaDeColas(int(req.json['modulo']),int(req.json['n']),int(req.json['a']),req.json['semilla'],req.json['cantExp'],req.json['cantCor'],req.json['L'],req.json['M'],req.json['opLM']))
+    return json.dumps(result.respuestaTeoriaDeColas(int(req.json['modulo']),int(req.json['cant']),int(req.json['a']),int(req.json['semillas']),int(req.json['exp']),float(req.json['inc']),int(req.json['corridas']),req.json['opcML'],req.json['iniM'],req.json['iniL']))
   except Exception() as e:
     return json.dumps({'errorServer': e})
 

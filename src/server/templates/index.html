@@ -35,8 +35,8 @@
                   <input class="entrante" type="number" name="modulo" placeholder="Modulo" required="required"/>
                   <label for="cant">Cantidad:</label>
                   <input class="entrante" type="number" name="cant" placeholder="Cantidad" required="required"/>
-                  <label for="bandera">Bandera:</label>
-                  <input class="entrante" type="number" name="bandera" placeholder="Bandera" required="required"/>
+                  <label for="bandera">A:</label>
+                  <input class="entrante" type="number" name="bandera" placeholder="A" required="required"/>
                   <label>Error:</label>
                   <select class="entrante" name="error" required="required">
                     <option value="0.01">0.01</option>
@@ -76,7 +76,7 @@
           <div class="list-container">
             <ul class="list">
               <li class="item">
-                <h2 class="item__title">Ruleta:</h2>
+                <h2 class="item__title">Ruleta (Metodo de los Indices):</h2>
                 <div class="item__contend" id="ruleta">
                   <div class="MBForm">
                     <div class="form">
@@ -87,8 +87,8 @@
                           <input type="number" name="modulo" placeholder="Modulo" required="required"/>
                           <label for="cant">Cantidad:</label>
                           <input type="number" name="cant" placeholder="Cantidad" required="required"/>
-                          <label for="bandera">Bandera:</label>
-                          <input type="number" name="bandera" placeholder="Bandera" required="required"/>
+                          <label for="bandera">A:</label>
+                          <input type="number" name="bandera" placeholder="A" required="required"/>
                           <label for="semilla">Semilla:</label>
                           <input type="number" name="semilla" placeholder="semilla" required="required"/>
                         </div><a class="calcular button" href="">calcular</a><a class="reset button" href="">Limpiar</a>
@@ -230,7 +230,7 @@
                 </div>
               </li>
               <li class="item">
-                <h2 class="item__title">Inventario(Parcial):</h2>
+                <h2 class="item__title">Inventario (Parcial):</h2>
                 <div class="item__contend">
                   <div class="MBForm">
                     <div class="form">
@@ -241,8 +241,8 @@
                           <input class="entrante" type="number" name="modulo" placeholder="Modulo" required="required"/>
                           <label for="cant">Cantidad:</label>
                           <input class="entrante" type="number" name="cant" placeholder="Cantidad" required="required"/>
-                          <label class="entrante" for="bandera">Bandera:</label>
-                          <input class="entrante" type="number" name="bandera" placeholder="Bandera" required="required"/>
+                          <label class="entrante" for="bandera">A:</label>
+                          <input class="entrante" type="number" name="bandera" placeholder="A" required="required"/>
                           <label for="semilla">Semilla:</label>
                           <input class="entrante" type="number" name="semilla" placeholder="semilla" required="required"/>
                         </div>
@@ -347,94 +347,47 @@
                 </div>
               </li>
               <li class="item">
-                <h2 class="item__title">Inventario(Normal):</h2>
+                <h2 class="item__title">Situación Generica (Teoria de colas):</h2>
                 <div class="item__contend">
                   <div class="MBForm">
                     <div class="form">
-                      <form data-id="inventarioNormal">
+                      <form data-id="teoriaDeColas">
                         <div class="subtitle">Parametros de la Serie a Generar:</div>
                         <div class="section">
                           <label for="modulo">Modulo:</label>
-                          <input type="number" name="modulo" placeholder="Modulo" required="required"/>
-                          <label for="cant">Cantidad:</label>
-                          <input type="number" name="cant" placeholder="Cantidad" required="required"/>
-                          <label for="bandera">Bandera:</label>
-                          <input type="number" name="bandera" placeholder="Bandera" required="required"/>
+                          <input class="entrante" type="number" name="modulo" placeholder="Modulo" required="required"/>
+                          <label for="cant">Cantidad de clientes:</label>
+                          <input class="entrante" type="number" name="cant" placeholder="Cantidad de clientes" required="required"/>
+                          <label for="bandera">A:</label>
+                          <input class="entrante" type="number" name="bandera" placeholder="A" required="required"/>
                           <label for="semilla">Semilla:</label>
-                          <input type="number" name="semilla" placeholder="semilla" required="required"/>
+                          <input class="entrante" type="number" name="semilla" placeholder="semilla" required="required"/>
                         </div>
-                        <div class="subtitle">Parametros de Experimentos:</div>
+                        <div class="subtitle">Parametros para el modelo de colas:</div>
                         <div class="section">
-                          <div class="section">
-                            <p class="full">Experimento 1</p>
-                            <input type="number" name="stock" placeholder="stock" required="required"/>
-                            <p class="full">corridas</p>
-                            <label for="pedidos">Cantidades de Puntos de Pedido:</label>
-                            <input id="cantPed" type="number" name="pedidos" placeholder="Puntos de reposición" min="1" value="1" required="required"/>
-                            <div id="inputsPed"></div>
+                          <label for="experimentos">Nro. de Experimentos:</label>
+                          <input class="entrante" type="number" name="experimentos" placeholder="experimentos" required="required"/>
+                          <label for="incremento">Incremento Entre Experimento:</label>
+                          <input class="entrante" type="number" name="incremento" placeholder="Incremento" required="required"/>
+                          <label for="corridas">Nro. de corridas:</label>
+                          <input class="entrante" type="number" name="corridas" placeholder="corridas" required="required"/>
+                          <div class="subtitle">Parametro a variar:
+                            <div class="inline">
+                              <label for="">M:</label>
+                              <input class="entrante s-10" type="radio" name="flag" required="required" checked="checked"/>
+                              <label for="">L:</label>
+                              <input class="entrante s-10" type="radio" name="flag" required="required"/>
+                            </div>
                           </div>
-                          <div class="section">
-                            <p class="full">Experimento 2</p>
-                            <label for="pedido">Punto de Pedido a Analizar:</label>
-                            <input type="number" name="pedido" placeholder="Pedido" required="required"/>
-                            <p class="full">corridas</p>
-                            <label for="stocks">Cantidades de Stocks:</label>
-                            <input id="cantStock" type="number" name="stocks" placeholder="Stocks" min="1" value="1" required="required"/>
-                            <div id="inputsStock"></div>
+                          <div class="section"><span class="subtitle">Valores iniciales</span>
+                            <input class="entrante" type="number" placeholder="M" required="required"/><br/>
+                            <input class="entrante" type="number" placeholder="L" required="required"/>
                           </div>
                         </div><a class="calcular button" href="">calcular</a><a class="reset button" href="">limpiar</a>
                       </form>
                     </div>
                   </div>
-                  <div id="experimentos"></div>
                 </div>
-              </li>
-              <li class="item">
-                <h2 class="item__title">Inventario(Poison):</h2>
-                <div class="item__contend">
-                  <div class="MBForm">
-                    <div class="form">
-                      <form data-id="inventarioPoisson">
-                        <div class="subtitle">Parametros de la Serie a Generar:</div>
-                        <div class="section">
-                          <label for="modulo">Modulo:</label>
-                          <input type="number" name="modulo" placeholder="Modulo" required="required"/>
-                          <label for="cant">Cantidad:</label>
-                          <input type="number" name="cant" placeholder="Cantidad" required="required"/>
-                          <label for="bandera">Bandera:</label>
-                          <input type="number" name="bandera" placeholder="Bandera" required="required"/>
-                          <label for="semilla">Semilla:</label>
-                          <input type="number" name="semilla" placeholder="semilla" required="required"/>
-                        </div>
-                        <div class="subtitle">Parametros de Experimentos:</div>
-                        <div class="section">
-                          <div class="section">
-                            <p class="full">Experimento 1</p>
-                            <label for="pedidos">Stock a Analizar:</label>
-                            <input type="number" name="stock" placeholder="stock" required="required"/>
-                            <p class="full">corridas</p>
-                            <label for="pedidos">Cantidades de Puntos de Pedido:</label>
-                            <input id="cantPed" type="number" name="pedidos" placeholder="Puntos de reposición" min="1" value="1" required="required"/>
-                            <div id="inputsPed"></div>
-                          </div>
-                          <div class="section">
-                            <p class="full">Experimento 2</p>
-                            <label for="pedido">Punto de Pedido a Analizar:</label>
-                            <input type="number" name="pedido" placeholder="Pedido" required="required"/>
-                            <p class="full">corridas</p>
-                            <label for="stocks">Cantidades de Stocks:</label>
-                            <input id="cantStock" type="number" name="stocks" placeholder="Stocks" min="1" value="1" required="required"/>
-                            <div id="inputsStock"></div>
-                          </div>
-                        </div><a class="calcular button" href="">calcular</a><a class="reset button" href="">limpiar</a>
-                      </form>
-                    </div>
-                  </div>
-                  <div id="experimentos"></div>
-                </div>
-              </li>
-              <li class="item">
-                <h2 class="item__title">Metodo de los Indices:</h2>
               </li>
             </ul>
           </div>
@@ -445,7 +398,102 @@
       </div>
       <section class="container informes">
         <div class="row">
-          <div id="newInfo"></div>
+          <div id="newInfo">
+            <h1>Teoria de Colas Resultado</h1>
+            <div class="tab m-auto">
+              <div class="tab__head">
+                <button>Caso 1</button>
+                <button>Caso 2</button>
+                <button>Caso 3</button>
+              </div>
+              <div class="tab__item">
+                <h3>Corridas del experimento 1</h3>
+                <div class="table-basic">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th></th>
+                        <th>Media TC</th>
+                        <th>a</th>
+                        <th>b</th>
+                      </tr>
+                    </thead>
+                    <tbody class="sencillo">
+                      <tr>
+                        <td>1</td>
+                        <td>135</td>
+                      </tr>
+                      <tr>
+                        <td>2</td>
+                        <td>271</td>
+                      </tr>
+                      <tr>
+                        <td>3</td>
+                        <td>271</td>
+                      </tr>
+                      <tr>
+                        <td>4</td>
+                        <td>180</td>
+                      </tr>
+                      <tr>
+                        <td>5</td>
+                        <td>90</td>
+                      </tr>
+                      <tr>
+                        <td>6</td>
+                        <td>36</td>
+                      </tr>
+                      <tr>
+                        <td>7</td>
+                        <td>12</td>
+                      </tr>
+                      <tr>
+                        <td>8</td>
+                        <td>4</td>
+                      </tr>
+                      <tr>
+                        <td>9</td>
+                        <td>1</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="tab__item">
+                <h3>Corridas:</h3>
+                <div class="table">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>dias</th>
+                        <th>Nro.</th>
+                        <th>a</th>
+                        <th>b</th>
+                      </tr>
+                    </thead>
+                    <tbody class="sencillo">
+                      <tr>
+                        <td>2</td>
+                        <td>30</td>
+                      </tr>
+                      <tr>
+                        <td>3</td>
+                        <td>40</td>
+                      </tr>
+                      <tr>
+                        <td>4</td>
+                        <td>30</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="tab__item">
+                <h3>Caso 3</h3>
+                <p>Cualquier yerba de contenido...</p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
       <div class="secciones">

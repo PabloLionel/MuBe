@@ -193,7 +193,7 @@ class Resultado:
       'inventario': inv.exp_inventario(dias, demanda, demora, dics, 5)
     }
 
-  def respuestaTeoriaDeColas(self, modulo, n, a, semilla, cantExp, cantCor, L, M, opLM):
+  def respuestaTeoriaDeColas(self, modulo, n, a, semilla, cantExp, increm, cantCor, opLM, M, L):
     """ Recibe los datos ingresados por el usuario
       Retorna una simulacion de un modelo de colas con una cola y un servidor"""
     # Instanciacion de las clases
@@ -207,7 +207,7 @@ class Resultado:
     exps = [todas_series.copy()] * cantExp
 
     return {
-      'tColas': colas.expsTdeColas(exps, L, M)
+      'tColas': colas.expsTdeColas(exps, L, M, opLM, increm)
     }
 
   def respuestaCasoRuleta(self, modulo, cant, a, semilla):

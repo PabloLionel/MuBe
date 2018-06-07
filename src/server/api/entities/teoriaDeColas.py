@@ -193,19 +193,29 @@ class TeoriaDeColas:
     # print("")
     return corridas, round(sumMediaTE/len(corridas), 4), round(sumMediaTW/len(corridas), 4), round(sumMediaTO/len(corridas), 4)
 
-  def expsTdeColas(self, Sser0y1, L, M):
+  def expsTdeColas(self, Sser0y1, L, M, opLM, inc):
     exps = {}
+    l = [L]
+    m = [M]
     te = []
     tw = []
     to = []
     for i in range(len(Sser0y1)):
+      if i > 0:
+        if opLM == True:
+          l.append(l[i-1])
+          m.append(m[i-1]+inc)
+        else:
+          l.append(l[i-1]+inc)
+          m.append(m[i-1])
       # print("***>>>>>>>>>>>>>>>>>> EXPERIMENTO "+ str(i+1) +" ****")
-      ts = self.met_inversoExp(Sser0y1[i], L[i], M[i])
+
+      ts = self.met_inversoExp(Sser0y1[i], l[i], m[i])
       col = self.cola(ts[0], ts[1], ts[2])
       te.append(col[1])
       tw.append(col[2])
       to.append(col[3])
-      exps['exp'+str(i+1)] = {'corrida': col[0], 'L': L[i], 'M': M[i],'mediaExpTE': col[1], 'mediaExpTW': col[2], 'mediaExpTO': col[3]}
+      exps['exp'+str(i+1)] = {'corrida': col[0], 'L': l[i], 'M': m[i],'mediaExpTE': col[1], 'mediaExpTW': col[2], 'mediaExpTO': col[3]}
 
     # print("               RESULTADOS DE LA SIMULACION")
     # print("N-Exp |  mediaTE  |  mediaTW  |  mediaTO")
