@@ -34,7 +34,7 @@ console.log(tColas)
 const newTabsColas = data => {
   let buttons = []
   let items = []
-  let numExp = 0
+  let numExp = 1
   for(key in data){
     buttons.push({
       el: 'button',
@@ -43,7 +43,24 @@ const newTabsColas = data => {
     items.push({
       el: 'div',
       attrs: [{name: 'class', val: 'tab__item'}],
-      child: []
+      child: [{
+        el: 'h2',
+        text: 'Experimento ' + numExp
+      },{
+        el: 'button',
+        attrs: [{name: 'class', val: 'button btnsCor'}],
+        text: 'Ver Corridas del experimento'
+      },{
+        el: 'h3',
+        text: 'Resumen de Corridas:'
+      },{
+        el: 'div',
+        text:'otra tabla aquí'
+      },{
+        el: 'div',
+        attrs: [{name: 'id', val: 'garficoTC-'+numExp++}],
+        text: 'grafico aquí'
+      }]
     })
   }
   return newComponentHTML({
@@ -138,6 +155,13 @@ const newTCCorridas = data => {
   })
 }
 let tResult = newTabsColas(tColas.tColas)
+let btnsCor = document.getElementsByClassName('btnsCor')
+each(btnsCor, btn => {
+  btn.addEventListenert('click', e => {
+    console.log(e.target)
+  })
+})
+console.log(btnsCor)
 console.log(tResult)
 const info = document.getElementById('newInfo')
 info.appendChild(tResult)
