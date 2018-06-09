@@ -31,44 +31,31 @@ console.log(tColas)
 // for(let key in tColas.tColas){
 //   console.log(tColas.tColas[key])
 // }
-const btns_head_tab = n => {
-  let btns = []
-  for(let i = 0; i < n; ++i)
-    btns.push({
+const newTabsColas = data => {
+  let buttons = []
+  let items = []
+  let numExp = 0
+  for(key in data){
+    buttons.push({
       el: 'button',
-      text: 'Exp. 1'
+      text: 'Exp. ' + numExp
     })
-    return btns
-  }//botones para cada item
-let items = data =>{
-  let pages = []
-  let exp = 0
-  for(let key in data){
-    pages.push(newComponentHTML({
+    items.push({
       el: 'div',
       attrs: [{name: 'class', val: 'tab__item'}],
-      child: [{
-        el: 'h4',
-        text: 'Experimento ' + exp++
-      },{
-        el: 'button',
-        attrs: [{name: 'class', val: 'button'}, {name: 'id', val: 'exp' + exp}],
-        text: 'Ver Corridas'
-      }]
-    }))
+      child: []
+    })
   }
-  return pages
-}//items o paginas del tab
-const newTabsColas = data => newComponentHTML({
-  el: 'div',
-  attrs: [{name: 'class', val: 'tab'}],
-  child: [{
+  return newComponentHTML({
     el: 'div',
-    attrs: [{name: 'class', val: 'tab__head'}],
-    child: btns_head_tab(getForm('teoriaDeColas').inputs[6].value ? parseInt(getForm('teoriaDeColas').inputs[6].value) : 0)
-  }].concat(items(data))
-})
-console.log(newTabsColas(tColas.tColash))
+    attrs: [{name: 'class', val: 'tab'}],
+    child: [{
+      el: 'div',
+      attrs: [{name: 'class', val: 'tab__head'}],
+      child: buttons
+    }].concat(items)
+  })
+}
 const newTCCorridas = data => {
   return newComponentHTML({
     el: 'div',
@@ -150,26 +137,46 @@ const newTCCorridas = data => {
     }]
   })
 }
+let tResult = newTabsColas(tColas.tColas)
+console.log(tResult)
 const info = document.getElementById('newInfo')
-// const _modal = modal('Corridas ',
-//       newComponentHTML({
-//         el: 'div',
-//         child: tColas.tColas.exp1.corrida.map(tabla =>newTCCorridas(tabla))
-//       })
-//       ,
-//       [newComponentHTML({
-//         el: 'button',
-//         attrs: [{name: 'class', val: 'button'},{name: 'id', val: 'salir-modal'}],
-//         text: 'Salir'
-//       })])
-// document.body.appendChild(_modal)
-// document.getElementById('salir-modal').addEventListener('click',()=>{document.body.removeChild(_modal)})
-// tColas.tColas.exp1.corrida.forEach(tabla => {
-//   info.appendChild(newTCCorridas(tabla))
-// })
-// console.log()
-// const newTColas = data => {
-//   newTabsColas(data)
-
-// }
+info.appendChild(tResult)
 tabs()
+
+// const btns_head_tab = n => {
+//   let btns = []
+//   for(let i = 0; i < n; ++i)
+//     btns.push({
+//       el: 'button',
+//       text: 'Exp. 1'
+//     })
+//     return btns
+//   }//botones para cada item
+// let items = data =>{
+//   let pages = []
+//   let exp = 0
+//   for(let key in data){
+//     pages.push(newComponentHTML({
+//       el: 'div',
+//       attrs: [{name: 'class', val: 'tab__item'}],
+//       child: [{
+//         el: 'h4',
+//         text: 'Experimento ' + exp++
+//       },{
+//         el: 'button',
+//         attrs: [{name: 'class', val: 'button'}, {name: 'id', val: 'exp' + exp}],
+//         text: 'Ver Corridas'
+//       }]
+//     }))
+//   }
+//   return pages
+// }//items o paginas del tab
+// const newTabsColas = data => newComponentHTML({
+//   el: 'div',
+//   attrs: [{name: 'class', val: 'tab'}],
+//   child: [{
+//     el: 'div',
+//     attrs: [{name: 'class', val: 'tab__head'}],
+//     child: btns_head_tab(getForm('teoriaDeColas').inputs[6].value ? parseInt(getForm('teoriaDeColas').inputs[6].value) : 0)
+//   }].concat(items(data))
+// })

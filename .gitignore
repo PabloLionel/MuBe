@@ -21,6 +21,10 @@ gulpfile-no-funciona.js
 __pycache__/
 *.pyc
 
+# Compilados por produccion
+server/static/css/
+server/templates/
+
 # virtualenv
 ENV/
 
