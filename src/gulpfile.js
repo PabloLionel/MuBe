@@ -77,7 +77,7 @@ gulp.task('sass', ()=>{
 })
 
 gulp.task('js', () => {
-  gulp.src([SRC + 'js/**/*.js'])
+  gulp.src([SRC + 'js/lib/_helpers.js',SRC + 'js/**/*.js'])
     .pipe(plumber(plumberOptions))
     .pipe(sourcemaps.init())
     .pipe(concat('all.js'))

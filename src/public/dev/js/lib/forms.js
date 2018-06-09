@@ -1,20 +1,3 @@
-var req = new XMLHttpRequest()
-var newInfo = document.getElementById('newInfo')
-var forms = Array.prototype.slice.apply(document.getElementsByTagName('form')).map(
-  x => ({
-    id: x.dataset.id,
-    form: x,
-    inputs: Array.prototype.slice.apply(x).map(inp => inp),
-    calcular: Array.prototype.slice.apply(x.children).filter(x => x.classList.contains('calcular'))[0],
-    reset: Array.prototype.slice.apply(x.children).filter(x => x.classList.contains('reset'))[0]
-  })
-)
-each(forms, el => {
-  el.reset.addEventListener('click', e => {
-    e.preventDefault();
-    e.target.parentElement.reset();
-  })
-})
 //[[[[[[[[[[[[[[[[[[[[[[[[Formulario para tablero]]]]]]]]]]]]]]]]]]]]]]]]
 var formRanking = getForm('ranking')
 var preview = Array.prototype.slice.apply(formRanking.form.parentElement.parentElement.children[1].children[1].children).slice(1, 6)

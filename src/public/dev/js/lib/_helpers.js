@@ -108,6 +108,24 @@ function addInputs(num,label,inputs){
   }
   return state
 }
+//[[[[[[[[[[[[[FORMULARIOS]]]]]]]]]]]]]
+var req = new XMLHttpRequest()
+var newInfo = document.getElementById('newInfo')
+var forms = Array.prototype.slice.apply(document.getElementsByTagName('form')).map(
+  x => ({
+    id: x.dataset.id,
+    form: x,
+    inputs: Array.prototype.slice.apply(x).map(inp => inp),
+    calcular: Array.prototype.slice.apply(x.children).filter(x => x.classList.contains('calcular'))[0],
+    reset: Array.prototype.slice.apply(x.children).filter(x => x.classList.contains('reset'))[0]
+  })
+)
+each(forms, el => {
+  el.reset.addEventListener('click', e => {
+    e.preventDefault();
+    e.target.parentElement.reset();
+  })
+})
 // function newInputExp(inputs, title, num){
 //   //  retornamos el estado de los nuevos inputs:
 //   var state = []
