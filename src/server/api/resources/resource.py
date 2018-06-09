@@ -35,6 +35,7 @@ from api.entities.inventario import Inventario
 from api.entities.metodoNormal import Normal
 from api.entities.metodoPoisson import Poisson
 from api.entities.metodoIndiceRuleta import IndiceRuleta
+from api.entities.teoriaDeColas import TeoriaDeColas
 
 ctrl = Controller()
 # Errores
@@ -62,9 +63,10 @@ class Resultado:
     arreglos = todas_series['series']
     arreglos0y1 = todas_series['series0y1']
     frecObs = todas_series['frecObs']
+    cantDig = todas_series['cantDig']
 
     return {
-      'chicuadrado': test.ranking(semilla, arreglos, arreglos0y1, frecObs, error)
+      'chicuadrado': test.ranking(semilla, arreglos, arreglos0y1, frecObs, cantDig, error)
     }
 
   def respuestaIndice(self, modulo, cant, a, semilla, error):
@@ -191,6 +193,23 @@ class Resultado:
       'inventario': inv.exp_inventario(dias, demanda, demora, dics, 5)
     }
 
+  def respuestaTeoriaDeColas(self, modulo, n, a, semilla, cantExp, increm, cantCor, opLM, M, L):
+    """ Recibe los datos ingresados por el usuario
+      Retorna una simulacion de un modelo de colas con una cola y un servidor"""
+    # Instanciacion de las clases
+    mul = GeneradorMultiplicativo()
+    colas = TeoriaDeColas()
+
+    # genera todas las series para la cantidad de corridas recibidas
+    todas_series = mul.gSeries(int(modulo), int(n), int(a), semilla, int(cantCor))
+
+    # se crea un arreglo con copias de las series generadas anteriormente con longitud igual a la cantidad de Experimento
+    exps = [todas_series.copy()] * cantExp
+
+    return {
+      'tColas': colas.expsTdeColas(exps, L, M, opLM, increm)
+    }
+
   def respuestaCasoRuleta(self, modulo, cant, a, semilla):
     """ Recibe los datos ingresados por el usuario
       Retorna valores que dependiendo de la serie generada pueden llegar a salir"""
@@ -231,3 +250,4 @@ pepe = [
 #resul.respuestaInvParcial(1000, 20, 13, [257], [2, 3, 4], [0.30, 0.40, 0.30], [1, 2, 3, 4, 5, 6, 7, 8, 9], [0.135, 0.271, 0.271, 0.180, 0.090, 0.036, 0.012, 0.004, 0.001], pepe)
 #print(resul.respuestaInvPoisson(1000, 20, 13, [257, 135, 251, 200], [2, 3, 4], [0.40, 0.50, 0.10], 5, pepe, 4))
 #print(resul.respuestaCasoRuleta(1000, 38, 13, [251]))
+#print(resul.respuestaTeoriaDeColas(10000, 5, 13, 3621, 2, 3, [0.2, 0.2], [0.8, 0.6], True))
