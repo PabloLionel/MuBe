@@ -1,5 +1,6 @@
 @mixin modal($w, $pad, $name: modal-content){
   .#{$name}{
+    display: none;
     position: fixed;
     top: 0;
     left: 0;

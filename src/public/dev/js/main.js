@@ -25,12 +25,6 @@ const modal = (head, body, foot) => {
   else
     throw new Error('El nombre del modal debe ser una cadena')
 }
-let tColas = {'tColas': {'exp1': {'corrida': [{'numCliente': [1, 2, 3], 'tLlegada': [0, 1.8442, 1.8783], 'tServicio': [1.7132, 7.3767, 0.1363], 'tEntLlega': [0, 1.8442, 0.0341], 'tEnCola': [0, 0, 7.3426], 'tPerman': [1.7132, 7.3767, 7.4789], 'tSalida': [1.7132, 9.2209, 9.3572], 'clientsCola': [0, 0, 1], 'tOcioServer': [0, 0, 0], 'numCorrida': 1, 'mediaTeL': 0.6261, 'mediaTE': 2.4475, 'mediaTW': 5.5229, 'mediaTC': 0.3333, 'mediaTO': 0.0}, {'numCliente': [1, 2, 3], 'tLlegada': [0, 0.5379, 1.5252], 'tServicio': [1.7132, 2.1516, 3.9494], 'tEntLlega': [0, 0.5379, 0.9873], 'tEnCola': [0, 1.1753, 2.3396], 'tPerman': [1.7132, 3.3269, 6.289], 'tSalida': [1.7132, 3.8648, 7.8142], 'clientsCola': [0, 1, 2], 'tOcioServer': [0, 0, 0], 'numCorrida': 2, 'mediaTeL': 0.5084, 'mediaTE': 1.1716, 'mediaTW': 3.7764, 'mediaTC': 1.0, 'mediaTO': 0.0}, {'numCliente': [1, 2, 3], 'tLlegada': [0, 1.9815, 2.4939], 'tServicio': [1.7132, 7.9262, 2.0496], 'tEntLlega': [0, 1.9815, 0.5124], 'tEnCola': [0, 0, 7.4138], 'tPerman': [1.7132, 7.9262, 9.4634], 'tSalida': [1.7132, 9.9077, 11.9573], 'clientsCola': [0, 0, 1], 'tOcioServer': [0, 0, 0], 'numCorrida': 3, 'mediaTeL': 0.8313, 'mediaTE': 2.4713, 'mediaTW': 6.3676, 'mediaTC': 0.3333, 'mediaTO': 0.0}], 'L': 0.2, 'M': 0.8, 'mediaExpTE': 2.0301, 'mediaExpTW': 5.2223, 'mediaExpTO': 0.0}, 'exp2': {'corrida': [{'numCliente': [1, 2, 3], 'tLlegada': [0, 2.4589, 2.5043], 'tServicio': [1.7132, 7.3767, 0.1363], 'tEntLlega': [0, 2.4589, 0.0454], 'tEnCola': [0, 0, 7.3313], 'tPerman': [1.7132, 7.3767, 7.4676], 'tSalida': [1.7132, 9.8356, 9.9719], 'clientsCola': [0, 0, 1], 'tOcioServer': [0, 0, 0], 'numCorrida': 1, 'mediaTeL': 0.8348, 'mediaTE': 2.4438, 'mediaTW': 5.5192, 'mediaTC': 0.3333, 'mediaTO': 0.0}, {'numCliente': [1, 2, 3], 'tLlegada': [0, 0.7172, 2.0337], 'tServicio': [1.7132, 2.1516, 3.9494], 'tEntLlega': [0, 0.7172, 1.3165], 'tEnCola': [0, 0.996, 1.8311], 'tPerman': [1.7132, 3.1476, 5.7805], 'tSalida': [1.7132, 3.8648, 7.8142], 'clientsCola': [0, 1, 1], 'tOcioServer': [0, 0, 0], 'numCorrida': 2, 'mediaTeL': 0.6779, 'mediaTE': 0.9424, 'mediaTW': 3.5471, 'mediaTC': 0.6667, 'mediaTO': 0.0}, {'numCliente': [1, 2, 3], 'tLlegada': [0, 2.6421, 3.3253], 'tServicio': [1.7132, 7.9262, 2.0496], 'tEntLlega': [0, 2.6421, 0.6832], 'tEnCola': [0, 0, 7.243], 'tPerman': [1.7132, 7.9262, 9.2926], 'tSalida': [1.7132, 10.5683, 12.6179], 'clientsCola': [0, 0, 1], 'tOcioServer': [0, 0, 0], 'numCorrida': 3, 'mediaTeL': 1.1084, 'mediaTE': 2.4143, 'mediaTW': 6.3107, 'mediaTC': 0.3333, 'mediaTO': 0.0}], 'L':0.2, 'M': 0.6, 'mediaExpTE': 1.9335, 'mediaExpTW': 5.1257, 'mediaExpTO': 0.0}}}
-// tColas = JSON.parse(tColas)
-console.log(tColas)
-// for(let key in tColas.tColas){
-//   console.log(tColas.tColas[key])
-// }
 const newTabsColas = data => {
   let buttons = []
   let items = []
@@ -48,18 +42,33 @@ const newTabsColas = data => {
         text: 'Experimento ' + numExp
       },{
         el: 'button',
-        attrs: [{name: 'class', val: 'button btnsCor'}],
+        attrs: [{name: 'class', val: 'button btnsCor'},{name: 'data-id',val: '' + numExp}],
         text: 'Ver Corridas del experimento'
-      },{
+      },
+        modal('Corridas del experimento ' + numExp,
+        newComponentHTML({
+          el: 'div',
+          child: data[key].corrida.map(tabla =>newTCCorridas(tabla))
+        }),
+        [newComponentHTML({
+          el: 'button',
+          attrs: [{name: 'class', val: 'button salir__modal'},{name: 'data-id', val: numExp}],
+          text: 'Salir'
+        })])
+      ,{
         el: 'h3',
         text: 'Resumen de Corridas:'
       },{
         el: 'div',
-        text:'otra tabla aquí'
+        attrs: [{name: 'class', val: 'table'}],
+        child: [newTablaPorExp(data[key].corrida)]
       },{
         el: 'div',
-        attrs: [{name: 'id', val: 'garficoTC-'+numExp++}],
-        text: 'grafico aquí'
+        attrs: [{name: 'class',val: 'grafico__content'}],
+        child: [{
+          el: 'canvas',
+          attrs: [{name: 'id', val: 'graficoTC-'+numExp++}]
+        }]
       }]
     })
   }
@@ -73,10 +82,71 @@ const newTabsColas = data => {
     }].concat(items)
   })
 }
-const newTCCorridas = data => {
+const newTablaPorExp = data =>{
   return newComponentHTML({
     el: 'div',
     attrs: [{name: 'class', val: 'table'}],
+    child: [{
+      el: 'h2',
+      text: ''
+    },{
+      el: 'table',
+      child: [{
+        el: 'thead',
+        child: [{
+          el: 'tr',
+          child: [{
+            el: 'th',
+            text: 'N° Corr.'
+          }, {
+            el: 'th',
+            text: 'Med. T. en Cola'
+          }, {
+            el: 'th',
+            text: 'Med. T. en Ocio'
+          }, {
+            el: 'th',
+            text: 'Med. T. de Per. en el S.'
+          }, {
+            el: 'th',
+            text: 'Med. T. ente Llegadas'
+          }, {
+            el: 'th',
+            text: 'Med. de N° de Cli. en Cola'
+          }]
+        }]
+      },{
+        el: 'tbody',
+        child: data.map((c,i) => ({
+          el: 'tr',
+            child: [{
+              el: 'td',
+              text: c.numCorrida.toString()
+            },{
+              el: 'td',
+              text: c.mediaTE.toString()
+            },{
+              el: 'td',
+              text: c.mediaTO.toString()
+            },{
+              el: 'td',
+              text: c.mediaTW.toString()
+            },{
+              el: 'td',
+              text: c.mediaTeL.toString()
+            },{
+              el: 'td',
+              text: c.mediaTC.toString()
+            }]
+        }))
+      }]
+    }]
+  })
+}
+const newTCCorridas = data => {
+  return newComponentHTML({
+    el: 'div',
+    attrs: [{name: 'class', val: 'table-basic'}],
     child: [{
       el: 'h2',
       text: 'Corrida ' + data.numCorrida
@@ -154,53 +224,101 @@ const newTCCorridas = data => {
     }]
   })
 }
-let tResult = newTabsColas(tColas.tColas)
-let btnsCor = document.getElementsByClassName('btnsCor')
-each(btnsCor, btn => {
-  btn.addEventListenert('click', e => {
-    console.log(e.target)
+const newTablaFinal = data => {
+  let acum = []
+  let numExp = 1
+  for(let key in data){
+    acum.push({
+      el: 'tr',
+      child: [{
+        el: 'td',
+        text: (numExp++).toString()
+      },{
+        el: 'td',
+        text: data[key].L.toString()
+      },{
+        el: 'td',
+        text: data[key].M.toString()
+      },{
+        el: 'td',
+        text: data[key].mediaExpTE.toString()
+      },{
+        el: 'td',
+        text: data[key].mediaExpTO.toString()
+      },{
+        el: 'td',
+        text: data[key].mediaExpTW.toString()
+      }]
+    })
+  }
+  return newComponentHTML({
+    el: 'div',
+    attrs: [{name: 'class', val: 'table'}],
+    child: [{
+      el: 'h2',
+      text: ''
+    },{
+      el: 'table',
+      child: [{
+        el: 'thead',
+        child: [{
+          el: 'tr',
+          child: [{
+            el: 'th',
+            text: 'Exp.'
+          }, {
+            el: 'th',
+            text: 'Tasa de Llegada(L)'
+          }, {
+            el: 'th',
+            text: 'Tasa de Servicio(M)'
+          }, {
+            el: 'th',
+            text: 'Med. T. de EC'
+          }, {
+            el: 'th',
+            text: 'Med. T. de Ocio'
+          }, {
+            el: 'th',
+            text: 'Med. de Perm. en Cola'
+          }]
+        }]
+      },{
+        el: 'tbody',
+        child: acum
+      }]
+    }]
   })
-})
-console.log(btnsCor)
-console.log(tResult)
-const info = document.getElementById('newInfo')
-info.appendChild(tResult)
-tabs()
-
-// const btns_head_tab = n => {
-//   let btns = []
-//   for(let i = 0; i < n; ++i)
-//     btns.push({
-//       el: 'button',
-//       text: 'Exp. 1'
-//     })
-//     return btns
-//   }//botones para cada item
-// let items = data =>{
-//   let pages = []
-//   let exp = 0
-//   for(let key in data){
-//     pages.push(newComponentHTML({
-//       el: 'div',
-//       attrs: [{name: 'class', val: 'tab__item'}],
-//       child: [{
-//         el: 'h4',
-//         text: 'Experimento ' + exp++
-//       },{
-//         el: 'button',
-//         attrs: [{name: 'class', val: 'button'}, {name: 'id', val: 'exp' + exp}],
-//         text: 'Ver Corridas'
-//       }]
-//     }))
-//   }
-//   return pages
-// }//items o paginas del tab
-// const newTabsColas = data => newComponentHTML({
-//   el: 'div',
-//   attrs: [{name: 'class', val: 'tab'}],
-//   child: [{
-//     el: 'div',
-//     attrs: [{name: 'class', val: 'tab__head'}],
-//     child: btns_head_tab(getForm('teoriaDeColas').inputs[6].value ? parseInt(getForm('teoriaDeColas').inputs[6].value) : 0)
-//   }].concat(items(data))
-// })
+}
+newTColas = data => {
+  const info = document.getElementById('newInfo')
+  info.appendChild(newComponentHTML({
+    el: 'h1',
+    attrs: [{name: 'class', val: 'tx-center tx-upper tx-Jumbo'}],
+    text: 'Teoria de Colas'
+  }))
+  info.appendChild(newTabsColas(data))
+  info.appendChild(newTablaFinal(data))
+  info.appendChild(newComponentHTML({
+    el: 'div',
+    attra: [{name: 'class', val: 'grafico__content'}],
+    child: [{
+      el: 'canvas',
+      attrs: [{name: 'class', val: 'graficoTC-simu'}]
+    }]
+  }))
+  let btnsCor = document.getElementsByClassName('btnsCor')
+  let modales = document.getElementsByClassName('modal-content')
+  each(btnsCor, btn => {
+    btn.addEventListener('click', e => {
+      modales[parseInt(e.target.dataset.id) - 1].style.display = 'block'
+    })
+  })
+  let btnsModSalir = document.getElementsByClassName('salir__modal')
+  each(btnsModSalir, btn => {
+    btn.addEventListener('click', e => {
+      modales[parseInt(e.target.dataset.id) - 1].style.display = 'none'
+    })
+  })
+  tabs()
+}
