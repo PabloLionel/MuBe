@@ -215,7 +215,7 @@ class TeoriaDeColas:
       te.append(col[1])
       tw.append(col[2])
       to.append(col[3])
-      exps['exp'+str(i+1)] = {'corrida': col[0], 'L': l[i], 'M': m[i],'mediaExpTE': col[1], 'mediaExpTW': col[2], 'mediaExpTO': col[3]}
+      exps['exp'+str(i+1)] = {'corrida': col[0], 'L': round(l[i], 4), 'M': round(m[i], 4),'mediaExpTE': col[1], 'mediaExpTW': col[2], 'mediaExpTO': col[3]}
 
     # print("               RESULTADOS DE LA SIMULACION")
     # print("N-Exp |  mediaTE  |  mediaTW  |  mediaTO")

@@ -15,7 +15,7 @@ function armarDataset(etiq, datos, color){
 
 function opcion(tituloX, tituloY) {
   return {
-    responsive: false,
+    responsive: true,
     scales: {
       xAxes: [{
         scaleLabel: {
