@@ -4,9 +4,9 @@
       form(data-id='teoriaDeColas')
         .subtitle Parametros de la Serie a Generar:
         .section
-          label(for='modulo') Modulo:
+          label(for='modulo') Modulo(m):
           input.entrante(type='number', name='modulo', placeholder='Modulo', required)
-          label(for='cant') Cantidad de clientes:
+          label(for='cant') Cantidad de clientes(n):
           input.entrante(type='number', name='cant', placeholder='Cantidad de clientes', required)
           label(for='bandera') A:
           input.entrante(type='number', name='bandera', placeholder='A', required)
@@ -26,9 +26,9 @@
           input.entrante(type='number', name='corridas', placeholder='corridas', required)
           .subtitle Parametro a variar:
             .inline
-              label(for='') M:
+              label(for='') Tasa media de T.de Servicio (M):
               input.entrante.s-10(type='radio', name='flag', required, checked)
-              label(for='') L:
+              label(for='') Tasa media de T. entre llegadas(L):
               input.entrante.s-10(type='radio', name='flag', required)
           .section
             span.subtitle Valores iniciales
