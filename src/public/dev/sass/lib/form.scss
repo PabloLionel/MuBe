@@ -62,8 +62,11 @@
         }
         .inline{
           * {
-            display: inline-block;
-            width: 50px;
+            @include toLeft(auto,0);
+            &:nth-child(even){
+              width: 70px;
+              height: 25px;
+            }
           }
         }
       }

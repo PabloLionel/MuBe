@@ -182,7 +182,7 @@ formTeoriaDeColas.calcular.addEventListener('click', e => {
   req.onload = () => {
     if (req.status >= 200 && req.status < 400) {
       var request = JSON.parse(req.response)
-      newInfo.appendChild(newTColas(request.tColas))
+      newTColas(request.tColas)
       cargarGraficosTColas(request.tColas)
     } else { console.error('Error en la conexion! Estado: ' + req.status) }
   }
