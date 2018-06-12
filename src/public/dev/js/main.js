@@ -309,7 +309,7 @@ newTColas = data => {
     attra: [{name: 'class', val: 'grafico__content'}],
     child: [{
       el: 'canvas',
-      attrs: [{name: 'class', val: 'graficoTC-simu'}]
+      attrs: [{name: 'id', val: 'graficoTC-simu'}]
     }]
   }))
   let btnsCor = document.getElementsByClassName('btnsCor')
