@@ -25,11 +25,11 @@
           label(for='corridas') Nro. de corridas:
           input.entrante(type='number', name='corridas', placeholder='corridas', required)
           .subtitle Parametro a variar:
-            .inline
+            .inline.clearfix
               label(for='') Tasa media de T.de Servicio (M):
-              input.entrante.s-10(type='radio', name='flag', required, checked)
+              input.entrante(type='radio', name='flag', required, checked)
               label(for='') Tasa media de T. entre llegadas(L):
-              input.entrante.s-10(type='radio', name='flag', required)
+              input.entrante(type='radio', name='flag', required)
           .section
             span.subtitle Valores iniciales
             input.entrante(placeholder='M', required)
