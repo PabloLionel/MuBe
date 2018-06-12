@@ -207,7 +207,7 @@ class Resultado:
     exps = [todas_series.copy()] * cantExp
 
     return {
-      'tColas': colas.expsTdeColas(exps, L, M, opLM, increm)
+      'tColas': colas.expsTdeColas(exps, float(L), float(M), opLM, float(increm))
     }
 
   def respuestaCasoRuleta(self, modulo, cant, a, semilla):

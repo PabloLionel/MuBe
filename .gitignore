@@ -22,7 +22,7 @@ __pycache__/
 *.pyc
 
 # Compilados por produccion
-server/static/css/
+server/static/
 server/templates/
 
 # virtualenv
