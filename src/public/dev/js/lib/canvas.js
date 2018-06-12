@@ -149,17 +149,17 @@ function cargarGraficosTColas(data) {
     var datosCorridas = []
     var cors = []
     var mTC = []
-    var mTE = []
+    var mTS = []
 
     each(exp, (el, key) => {
       cors.push(el.numCorrida)
-      mTC.push(el.mediaTC)
+      mTS.push(el.mediaTS)
       mTE.push(el.mediaTE)
     })
 
-    datosCorridas = [armarDataset('Media de Clientes en Cola', mTC, colorAut()), armarDataset('Media T. en la Cola', mTE, colorAut())]
+    datosCorridas = [armarDataset('Media de Clientes en Cola', mTS, colorAut()), armarDataset('Media T. de espera en la Cola', mTE, colorAut())]
 
-    barExps = new Chart(figExps, graficarTodo('bar', cors, datosCorridas, opcion('Corridas', 'Media TC y TE')))
+    barExps = new Chart(figExps, graficarTodo('bar', cors, datosCorridas, opcion('Corridas', 'Media TS y TE')))
   }
 
   var figSimu = document.getElementById("graficoTC-simu")

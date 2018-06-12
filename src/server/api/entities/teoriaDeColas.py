@@ -139,6 +139,7 @@ class TeoriaDeColas:
       O = []
       O.append(0)
       sumTeL = R[j][0]
+      sumTS = S[j][0]
       sumTE = E[0]
       sumTW = W[0]
       sumTC = C[0]
@@ -154,16 +155,19 @@ class TeoriaDeColas:
         C.append(clientesEnCola(T[j],A,i)) # Numero de Clientes en la cola
         O.append(round(T[j][i]-A[i-1] if T[j][i] > A[i] else 0,4)) # Tiempo de ocio del servidor
         sumTeL = sumTeL + R[j][i]
+        sumTS = sumTS + S[j][i]
         sumTE = sumTE + E[i]
         sumTW = sumTW + W[i]
         sumTC = sumTC + C[i]
         sumTO = sumTO + O[i]
+
       #   print('   ', i + 1, '   | ', T[j][i], ' | ', S[j][i], '  |    ', R[j][i], '    | ', E[i], '  |   ', W[i], '   | ', A[i], '  |      ', C[i], '     |      ', O[i])
       # print("")
 
       mediaTE = round(sumTE/n, 4)
       mediaTW = round(sumTW/n, 4)
       mediaTO = round(sumTO/n, 4)
+      mediaTS = round(sumTS/n, 4)
 
       corridas[j] = {
         'numCliente': numClient,
@@ -180,7 +184,8 @@ class TeoriaDeColas:
         'mediaTE': mediaTE,
         'mediaTW': mediaTW,
         'mediaTC': round(sumTC/n, 4),
-        'mediaTO': mediaTO
+        'mediaTO': mediaTO,
+        'mediaTS': mediaTS
       }
       sumMediaTE = sumMediaTE + mediaTE
       sumMediaTW = sumMediaTW + mediaTW
