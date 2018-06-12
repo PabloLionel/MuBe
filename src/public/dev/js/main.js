@@ -146,7 +146,7 @@ const newTablaPorExp = data =>{
 const newTCCorridas = data => {
   return newComponentHTML({
     el: 'div',
-    attrs: [{name: 'class', val: 'table-basic'}],
+    attrs: [{name: 'class', val: 'table'}],
     child: [{
       el: 'h2',
       text: 'Corrida ' + data.numCorrida
@@ -280,7 +280,7 @@ const newTablaFinal = data => {
             text: 'Med. T. de Ocio'
           }, {
             el: 'th',
-            text: 'Med. de Perm. en Cola'
+            text: 'Med. de Perm. en Sist.'
           }]
         }]
       },{
@@ -298,6 +298,11 @@ newTColas = data => {
     text: 'Teoria de Colas'
   }))
   info.appendChild(newTabsColas(data))
+  info.appendChild(newComponentHTML({
+    el: 'h2',
+    attrs: [{name: 'class', val: 'tx-center tx-upper tx-Jumbo'}],
+    text: 'Resumen de Simulación'
+  }))
   info.appendChild(newTablaFinal(data))
   info.appendChild(newComponentHTML({
     el: 'div',
