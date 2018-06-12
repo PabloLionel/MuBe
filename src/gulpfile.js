@@ -107,9 +107,16 @@ gulp.task('prod', ()=>{
     .pipe(plumber(plumberOptions))
     .pipe(concat('all.js'))
     .pipe(gulp.dest('server/static/js/'))
+  gulp.src([SRC + 'img/*.*'])
+    .pipe(gulp.dest('server/static/img/'))
 })
 
-gulp.task('default', ['pug','sass','js'], ()=>{
+gulp.task('img', ()=>{
+ gulp.src([SRC + 'img/*.*'])
+    .pipe(gulp.dest(DEST + 'img/*.*'))
+})
+
+gulp.task('default', ['pug','sass','js','img'], ()=>{
 
   browserSync.init(require('./bs-config.js'));
 

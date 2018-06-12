@@ -100,10 +100,10 @@ const newTablaPorExp = data =>{
             text: 'N° Corr.'
           }, {
             el: 'th',
-            text: 'Med. T. en Cola'
+            text: 'Med. de T. de Servicio'
           }, {
             el: 'th',
-            text: 'Med. T. en Ocio'
+            text: 'Med. T. en Cola'
           }, {
             el: 'th',
             text: 'Med. T. de Per. en el S.'
@@ -113,6 +113,9 @@ const newTablaPorExp = data =>{
           }, {
             el: 'th',
             text: 'Med. de N° de Cli. en Cola'
+          }, {
+            el: 'th',
+            text: 'Med. T. en Ocio'
           }]
         }]
       },{
@@ -124,10 +127,10 @@ const newTablaPorExp = data =>{
               text: c.numCorrida.toString()
             },{
               el: 'td',
-              text: c.mediaTE.toString()
+              text: c.mediaTS.toString()
             },{
               el: 'td',
-              text: c.mediaTO.toString()
+              text: c.mediaTE.toString()
             },{
               el: 'td',
               text: c.mediaTW.toString()
@@ -137,6 +140,9 @@ const newTablaPorExp = data =>{
             },{
               el: 'td',
               text: c.mediaTC.toString()
+            },{
+              el: 'td',
+              text: c.mediaTO.toString()
             }]
         }))
       }]

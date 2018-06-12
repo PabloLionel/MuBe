@@ -5,7 +5,8 @@ module.exports = {
   "files": [
     "./public/dist/html/*.html",
     "./public/dist/css/*.css",
-    "./public/dist/js/*.js"
+    "./public/dist/js/*.js",
+    "./public/dist/img/*.*"
   ],
   "browser": "default",
   "injectChanges": true,
