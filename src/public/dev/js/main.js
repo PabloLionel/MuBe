@@ -254,6 +254,9 @@ const newTablaFinal = data => {
       },{
         el: 'td',
         text: data[key].mediaExpTW.toString()
+      },{
+        el: 'td',
+        text: data[key].mediaExpTS.toString()
       }]
     })
   }
@@ -287,6 +290,9 @@ const newTablaFinal = data => {
           }, {
             el: 'th',
             text: 'Med. de Perm. en Sist.'
+          }, {
+            el: 'th',
+            text: 'Med. T. Servicio'
           }]
         }]
       },{

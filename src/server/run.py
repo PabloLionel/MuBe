@@ -74,10 +74,10 @@ def respuestaInvPoisson():
 @app.route("/tColas", methods=['POST'])
 @crossdomain(origin='*')
 def respuestaTeoriaDeColas():
-  try:
-    return json.dumps(result.respuestaTeoriaDeColas(int(req.json['modulo']),int(req.json['cant']),int(req.json['a']),int(req.json['semillas']),int(req.json['exp']),float(req.json['inc']),int(req.json['corridas']),req.json['opcML'],req.json['iniM'],req.json['iniL']))
-  except Exception() as e:
-    return json.dumps({'errorServer': e})
+  # try:
+  return json.dumps(result.respuestaTeoriaDeColas(int(req.json['modulo']),int(req.json['cant']),int(req.json['a']),int(req.json['semillas']),int(req.json['exp']),float(req.json['inc']),int(req.json['corridas']),req.json['opcML'],req.json['iniM'],req.json['iniL']))
+  # except Exception() as e:
+  #   return json.dumps({'errorServer': e})
 
 @app.route("/test", methods=['POST'])
 @crossdomain(origin='*')
@@ -88,7 +88,7 @@ def test():
     return json.dumps({'test': 0, 'err': e})
 
 if __name__ == "__main__":
-    app.run(debug=True, port=4444, host='0.0.0.0')
+    app.run(debug=True, port=4455, host='0.0.0.0')
 
 
 # var req = new XMLHttpRequest()

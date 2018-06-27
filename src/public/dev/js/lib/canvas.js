@@ -8,6 +8,7 @@ function armarDataset(etiq, datos, color){
     data: datos,
     borderColor: 'rgba(' + color + ', 1)',
     borderWidth: 1.5,
+    fill: false,
     backgroundColor: 'rgba(' + color + ', 0.2)',
     hoverBackgroundColor: 'rgba(' + color + ', 0.5)'
   }
@@ -145,42 +146,54 @@ function cargarGraficosInvPar(data) {
 function cargarGraficosTColas(data) {
   function graficarTColas(exp, nExp){
     var figExps = document.getElementById("graficoTC-"+ nExp);
-    var barExps
+    var lineExps
     var datosCorridas = []
     var cors = []
-    var mTC = []
+    var mTE = []
     var mTS = []
+    var mTO = []
 
     each(exp, (el, key) => {
       cors.push(el.numCorrida)
       mTS.push(el.mediaTS)
       mTE.push(el.mediaTE)
+      mTO.push(el.mediaTO)
     })
 
-    datosCorridas = [armarDataset('Media de Clientes en Cola', mTS, colorAut()), armarDataset('Media T. de espera en la Cola', mTE, colorAut())]
+    datosCorridas = [
+      armarDataset('Media de T. de Servicio', mTS, colorAut()),
+      armarDataset('Media T. de espera en la Cola', mTE, colorAut()),
+      armarDataset('Media de T. de Ocio', mTO, colorAut())
+    ]
 
-    barExps = new Chart(figExps, graficarTodo('bar', cors, datosCorridas, opcion('Corridas', 'Media TS y TE')))
+    lineExps = new Chart(figExps, graficarTodo('line', cors, datosCorridas, opcion('Corridas', 'Media TS, TE y TO')))
   }
 
   var figSimu = document.getElementById("graficoTC-simu")
-  var barSimu
+  var lineSimu
   var datos = []
   var expTodos = []
   var mExpTE = []
-  var mExpTW = []
+  var mExpTS = []
+  var mExpTO = []
 
   i=0
   for (key in data){
     i = i + 1
     expTodos.push(i)
     mExpTE.push(data[key].mediaExpTE)
-    mExpTW.push(data[key].mediaExpTW)
+    mExpTS.push(data[key].mediaExpTS)
+    mExpTO.push(data[key].mediaExpTO)
     graficarTColas(data[key].corrida, i)
   }
 
-  datos = [armarDataset('Media T. en la Cola', mExpTE, colorAut()), armarDataset('Media T. Permanencia', mExpTW, colorAut())]
+  datos = [
+    armarDataset('Media T. en la Cola', mExpTE, colorAut()),
+    armarDataset('Media T. de Servicio', mExpTS, colorAut()),
+    armarDataset('Media T. de Ocio', mExpTO, colorAut())
+  ]
 
-  barSimu = new Chart(figSimu, graficarTodo('bar', expTodos, datos, opcion('Experimentos', 'Media TE y TW')))
+  lineSimu = new Chart(figSimu, graficarTodo('line', expTodos, datos, opcion('Experimentos', 'Media TE, TS y TO')))
 }
 // function colorAut() {
 //   return Math.floor(Math.random() * 251) + ', ' + Math.floor(Math.random() * 251) + ', ' + Math.floor(Math.random() * 251);

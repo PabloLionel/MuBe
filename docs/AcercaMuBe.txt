@@ -1,0 +1,3 @@
+MuBe es un sistema que ha sido desarrollado en el transcurso de un cuatrimestre sobre los ejercicios, 
+parciales, laboratorios y seminarios de la materia Modelos y Simulación correspondiente al 5to año de 
+la carrera de Lic. en Sistemas de información de la FaCENA de la UNNE.

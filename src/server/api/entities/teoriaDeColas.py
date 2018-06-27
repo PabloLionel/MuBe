@@ -83,13 +83,13 @@ class TeoriaDeColas:
       l = -1/L # calculo del parametro L usado para el tiempo de Servicio(S)
       m = -1/M # calculo del parametro L usado para el tiempo de Llegada(T) y tiempo entre llegadas (R)
 
-      S.append(round(l * num.log(ser0y1[0][0]), 4)) # se calcula el primer valor de la inversa de la exponencial y se almacena en S
+      S.append(round(m * num.log(ser0y1[0][0]), 4)) # se calcula el primer valor de la inversa de la exponencial y se almacena en S
       #   print(T[0], S[0], R[0])
       for j in range(1, len(ser0y1[i])):
         ln = num.log(ser0y1[i][j]) # logaritmo neperiano de un numero de la serie generada recibida
 
-        S.append(round(l * ln, 4)) # se calcula la inversa de la exponencial con el parametro L y se almacena en S
-        R.append(round(m * ln, 4)) # se calcula la inversa de la exponencial con el parametro M y se almacena en R
+        S.append(round(m * ln, 4)) # se calcula la inversa de la exponencial con el parametro L y se almacena en S
+        R.append(round(l * ln, 4)) # se calcula la inversa de la exponencial con el parametro M y se almacena en R
         T.append(round(T[j-1] + R[j], 4)) # acumula los valores calculados en R
       #     print(T[j], S[j], R[j])
       #   print("----------")
@@ -119,6 +119,7 @@ class TeoriaDeColas:
     sumMediaTE = 0
     sumMediaTW = 0
     sumMediaTO = 0
+    sumMediaTS = 0
     for j in range(cantCor):
       n = len (R[j]) # longitud de la cola para markob: de 0 a n ESPACIO DE ESTADP (Rango de la va Xi)
       #R = [0,.0692,1.8901,5.2487,.0214,1.1352,.1696,3.3032]
@@ -147,13 +148,24 @@ class TeoriaDeColas:
       # print("***************--------------..............########## Corrida "+ str(j+1) +" ##########..............--------------*****************")
       # print('NCliente | Tllegada | TServicio | TentreLlegadas |  TenCola  | TPermanencia |  TSalida  | ClientesCola | TOcioServidos')
       # print('   ',1, '   |    ', T[j][0], '   | ', S[j][0], '  |       ', R[j][0], '      |    ', E[0], '    |    ', W[0], '  | ', A[0], '  |      ', C[0], '     |      ', O[0])
+      a = W[0]
       for i in range(1,n):
         numClient.append(i+1)
-        E.append(round(A[i-1]-T[j][i] if A[i-1]>T[j][i] else 0,4)) # Tiempo de espera en la cola
-        W.append(round(E[i]+S[j][i],4)) # Tiempo de Permanencia en la Sistema
+        #E.append(round(A[i-1]-T[j][i] if A[i-1]>T[j][i] else 0,4)) # Tiempo de espera en la cola
+        if a <= R[j][i]:
+          #W.append(round(E[i]+S[j][i],4)) # Tiempo de Permanencia en la Sistema
+          O.append(round(R[j][i]-a, 4))
+          a=S[j][i]
+        else:
+          #O.append(round(T[j][i]-A[i-1] if T[j][i] > A[i] else 0,4)) # Tiempo de ocio del servidor
+          O.append(round(0, 4))
+          a = a + S[j][i] - R[j][i]
+
+        W.append(round(a, 4))
+        E.append(round(W[i]-S[j][i],4))
         A.append(round(W[i]+T[j][i],4)) # Tiempo de Salida
+        #A.append(round(T[j][i]+W[i]))
         C.append(clientesEnCola(T[j],A,i)) # Numero de Clientes en la cola
-        O.append(round(T[j][i]-A[i-1] if T[j][i] > A[i] else 0,4)) # Tiempo de ocio del servidor
         sumTeL = sumTeL + R[j][i]
         sumTS = sumTS + S[j][i]
         sumTE = sumTE + E[i]
@@ -190,13 +202,14 @@ class TeoriaDeColas:
       sumMediaTE = sumMediaTE + mediaTE
       sumMediaTW = sumMediaTW + mediaTW
       sumMediaTO = sumMediaTO + mediaTO
+      sumMediaTS = sumMediaTS + mediaTS
     # print("                          >>>>RESULTADOS DEL EXPERIMENTO >>>>")
     # print("NCorrida | MediaTentreLlegada | MediaTenCola | MediaTPermanencia | MediaClientesCola | MediaTOcio")
     # for k in range(len(corridas)):
     #   print('   ', corridas[k]['numCorrida'], '   |      ', corridas[k]['mediaTeL'], '      |   ', corridas[k]['mediaTE'], '   |      ', corridas[k]['mediaTW'], '     |      ', corridas[k]['mediaTC'], '     |   ', corridas[k]['mediaTO'])
     # print("")
     # print("")
-    return corridas, round(sumMediaTE/len(corridas), 4), round(sumMediaTW/len(corridas), 4), round(sumMediaTO/len(corridas), 4)
+    return corridas, round(sumMediaTE/len(corridas), 4), round(sumMediaTW/len(corridas), 4), round(sumMediaTO/len(corridas), 4), round(sumMediaTS/len(corridas), 4)
 
   def expsTdeColas(self, Sser0y1, L, M, opLM, inc):
     exps = {}
@@ -205,6 +218,7 @@ class TeoriaDeColas:
     te = []
     tw = []
     to = []
+    tss = []
     for i in range(len(Sser0y1)):
       if i > 0:
         if opLM == True:
@@ -220,7 +234,8 @@ class TeoriaDeColas:
       te.append(col[1])
       tw.append(col[2])
       to.append(col[3])
-      exps['exp'+str(i+1)] = {'corrida': col[0], 'L': round(l[i], 4), 'M': round(m[i], 4),'mediaExpTE': col[1], 'mediaExpTW': col[2], 'mediaExpTO': col[3]}
+      tss.append(col[4])
+      exps['exp'+str(i+1)] = {'corrida': col[0], 'L': round(l[i], 4), 'M': round(m[i], 4),'mediaExpTE': col[1], 'mediaExpTW': col[2], 'mediaExpTO': col[3], 'mediaExpTS': col[4]}
 
     # print("               RESULTADOS DE LA SIMULACION")
     # print("N-Exp |  mediaTE  |  mediaTW  |  mediaTO")

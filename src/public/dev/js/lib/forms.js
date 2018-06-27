@@ -199,7 +199,7 @@ formTeoriaDeColas.calcular.addEventListener('click', e => {
     iniL: parseFloat(formTeoriaDeColas.inputs[10].value)
     })
     )
-    window.scrollTo(0, document.getElementById('informe').getBoundingClientRect().y)
+    //window.scrollTo(0, document.getElementById('informe').getBoundingClientRect().y)
 })
 
 
